@@ -7,5 +7,12 @@
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %header 
+    %h1.sticky-top.text-center レンタパーク
+    - if user_signed_in?
+      = "ユーザー名：#{current_user.nickname}"
+      = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout"
   %body
     = yield
+  %footer.fixed-bottom.text-center
+    %h1 ryo-east-2021

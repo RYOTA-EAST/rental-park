@@ -53,17 +53,14 @@
         = f.label :prefecture
         %br/
         = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
-    .row
       .field
         = f.label :city
         %br/
         = f.text_field :city, autofocus: true
-    .row
       .field
         = f.label :address
         %br/
         = f.text_field :address, autofocus: true
-    .row
       .field
         = f.label :explosive
         %br/
@@ -75,6 +72,6 @@
         = f.text_field :phone_number, autofocus: true
     .row
       .actions
-        = f.submit "Sign up", class:"btn btn-primary"
+        = f.submit "Sign up", class:["btn btn-primary", "btn-lg", "btn-block"]
     .row
       = render "users/shared/links"
