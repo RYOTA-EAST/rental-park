@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_063758) do
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
     t.string "postal_code", default: "", null: false
-    t.integer "prefecter_id", null: false
+    t.integer "prefecture_id", null: false
     t.string "city", default: "", null: false
     t.string "address", default: "", null: false
     t.string "explosive", default: "", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_063758) do
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
     t.string "postal_code", default: "", null: false
-    t.integer "prefecter_id", null: false
+    t.integer "prefecture_id", null: false
     t.string "city", default: "", null: false
     t.string "address", default: "", null: false
     t.string "explosive", default: "", null: false

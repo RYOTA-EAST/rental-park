@@ -60,3 +60,5 @@ gem 'haml-rails'
 
 gem 'bootstrap'
 gem 'jquery-rails'
+
+gem 'active_hash'
