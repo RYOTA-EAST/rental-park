@@ -7,5 +7,5 @@ class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
 
-  validates :genre_id, numericality: { other_than: 1 }
+  validates :prefecture_id, numericality: { other_than: 1 }
 end

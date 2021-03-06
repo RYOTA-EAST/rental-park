@@ -7,7 +7,7 @@
       .field.mb-1
         = f.label :nickname
         %br/
-        = f.email_field :nickname, autofocus: true
+        = f.text_field :nickname, autofocus: true
     .row
       .field
         = f.label :email
@@ -29,25 +29,25 @@
       .field
         = f.label :last_name
         %br/
-        = f.email_field :last_name, autofocus: true
+        = f.text_field :last_name, autofocus: true
       .field
         = f.label :first_name
         %br/
-        = f.email_field :first_name, autofocus: true
+        = f.text_field :first_name, autofocus: true
     .row
       .field
         = f.label :last_name_kana
         %br/
-        = f.email_field :last_name_kana, autofocus: true
+        = f.text_field :last_name_kana, autofocus: true
       .field
         = f.label :first_name_kana
         %br/
-        = f.email_field :first_name_kana, autofocus: true
+        = f.text_field :first_name_kana, autofocus: true
     .row
       .field
         = f.label :postal_code
         %br/
-        = f.email_field :postal_code, autofocus: true
+        = f.text_field :postal_code, autofocus: true
     .row
       .field
         = f.label :prefecture
@@ -57,22 +57,22 @@
       .field
         = f.label :city
         %br/
-        = f.email_field :city, autofocus: true
+        = f.text_field :city, autofocus: true
     .row
       .field
         = f.label :address
         %br/
-        = f.email_field :address, autofocus: true
+        = f.text_field :address, autofocus: true
     .row
       .field
         = f.label :explosive
         %br/
-        = f.email_field :explosive, autofocus: true
+        = f.text_field :explosive, autofocus: true
     .row
       .field
         = f.label :phone_number
         %br/
-        = f.email_field :phone_number, autofocus: true
+        = f.text_field :phone_number, autofocus: true
     .row
       .actions
         = f.submit "Sign up", class:"btn btn-primary"
