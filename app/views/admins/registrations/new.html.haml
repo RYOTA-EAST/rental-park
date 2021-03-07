@@ -1,21 +1,77 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "admins/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "admins/shared/links"
+.container
+  .row
+    %h2.mb-3 Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "users/shared/error_messages", resource: resource
+    .row
+      .field.mb-1
+        = f.label :nickname
+        %br/
+        = f.text_field :nickname, autofocus: true
+    .row
+      .field
+        = f.label :email
+        %br/
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+    .row
+      .field
+        = f.label :password
+        - if @minimum_password_length
+          %em
+            (#{@minimum_password_length} characters minimum)
+        %br/
+        = f.password_field :password, autocomplete: "new-password"
+      .field
+        = f.label :password_confirmation
+        %br/
+        = f.password_field :password_confirmation, autocomplete: "new-password"
+    .row
+      .field
+        = f.label :last_name
+        %br/
+        = f.text_field :last_name, autofocus: true
+      .field
+        = f.label :first_name
+        %br/
+        = f.text_field :first_name, autofocus: true
+    .row
+      .field
+        = f.label :last_name_kana
+        %br/
+        = f.text_field :last_name_kana, autofocus: true
+      .field
+        = f.label :first_name_kana
+        %br/
+        = f.text_field :first_name_kana, autofocus: true
+    .row
+      .field
+        = f.label :postal_code
+        %br/
+        = f.text_field :postal_code, autofocus: true
+    .row
+      .field
+        = f.label :prefecture
+        %br/
+        = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
+      .field
+        = f.label :city
+        %br/
+        = f.text_field :city, autofocus: true
+      .field
+        = f.label :address
+        %br/
+        = f.text_field :address, autofocus: true
+      .field
+        = f.label :explosive
+        %br/
+        = f.text_field :explosive, autofocus: true
+    .row
+      .field
+        = f.label :phone_number
+        %br/
+        = f.text_field :phone_number, autofocus: true
+    .row
+      .actions
+        = f.submit "Sign up", class:["btn btn-primary", "btn-lg", "btn-block"]
+    .row
+      = render "users/shared/links"
