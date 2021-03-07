@@ -21,6 +21,7 @@
 ## Association
 - has_many :rentals
 - has_many :cars
+- has_many :parks
 
 # Carsテーブル
 
@@ -35,27 +36,6 @@
 
 ## Association
 - belongs_to :user
-- has_many :parks
-
-# Adminsテーブル
-
-|Column             |Type    |Options                        |
-|-------------------|--------|-------------------------------|
-|nickname           |string  |null: false                    |
-|email              |string  |null: false, unique: true      |
-|encrypted_password |string  |null: false                    |
-|last_name          |string  |null: false                    |
-|first_name         |string  |null: false                    |
-|last_name_kana     |string  |null: false                    |
-|first_name_kana    |string  |null: false                    |
-|postal_code        |string  |null: false                    |
-|prefecture_id      |integer |null: false                    |
-|city               |string  |null: false                    |
-|address            |string  |null: false                    |
-|explosive          |string  |                               |
-|phone_number       |string  |null: false                    |
-
-## Association
 - has_many :parks
 
 # Parksテーブル
@@ -75,7 +55,7 @@
 |admin              |references     |null: false, foreign_key: true |
 
 ## Association
-- belongs_to :admin
+- belongs_to :user
 - has_many :unusable_times
 - has_many :rentals
 

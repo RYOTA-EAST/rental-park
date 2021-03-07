@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title RentalPark
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %header.container.sticky-top
+    .d-flex.justify-content-between
+      .row
+        %h1 レンタパーク
+      .login-user
+        - if user_signed_in?
+          = "USER名：#{current_user.nickname}"
+          = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout"
+  %body
+    = yield
+  %footer.fixed-bottom.text-center
+    %h1 ryo-east-2021
