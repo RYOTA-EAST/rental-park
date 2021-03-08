@@ -1,0 +1,13 @@
+.container
+  %h1 Park#index
+  = link_to '新規作成', new_park_path
+  %h1 駐車場一覧
+  .row 
+    - @park_all.each do |park|
+      .col-3
+        = link_to park_path(park.id) do
+          .card
+            .card-body
+              %h5= "名前：#{park.name}"
+              %h6= "単価：#{park.unit_price}"
+              %p= "提供者：#{park.user.nickname}"
