@@ -52,7 +52,7 @@
 |unit_price         |integer        |null: false                    |
 |start_time         |datetime       |null: false                    |
 |end_time           |datetime       |null: false                    |
-|admin              |references     |null: false, foreign_key: true |
+|user               |references     |null: false, foreign_key: true |
 
 ## Association
 - belongs_to :user

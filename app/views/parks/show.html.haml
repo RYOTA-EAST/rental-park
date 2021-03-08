@@ -1,0 +1,32 @@
+.container 
+  .row 
+    .col-10
+      %h5 詳細ページ
+    .col 
+      =link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
+      =link_to '削除', park_path(params[:id]), method: :delete, class: "btn btn-danger"
+  %table.table.text-center
+    %tr 
+      %th 項目
+      %th 内容
+    %tr 
+      %td 名前
+      %td= @park_find.name
+    %tr 
+      %td No
+      %td= @park_find.number
+    %tr 
+      %td 郵便番号
+      %td= @park_find.postal_code
+    %tr 
+      %td 住所
+      %td= @park_find.city + @park_find.address + @park_find.explosive
+    %tr 
+      %td 単価
+      %td= @park_find.unit_price
+    %tr 
+      %td 開始日時
+      %td= @park_find.start_time
+    %tr 
+      %td 終了日時
+      %td= @park_find.end_time
