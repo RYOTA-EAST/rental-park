@@ -1,0 +1,40 @@
+.container
+  = form_with model: @park_find, local: true do |f|
+    = render 'layouts/error_messages', model: f.object
+    .row
+      .form
+        = f.label :name
+        = f.text_field :name
+      .form
+        = f.label :number
+        = f.text_field :number
+    .row
+      .form
+        = f.label :postal_code
+        = f.text_field :postal_code
+    .row
+      .form
+        = f.label :prefecture
+        = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
+      .form
+        = f.label :city
+        = f.text_field :city
+      .form
+        = f.label :address
+        = f.text_field :address
+      .form
+        = f.label :explosive
+        = f.text_field :explosive
+    .row
+      .form
+        = f.label :unit_price
+        = f.text_field :unit_price
+    .row
+      .form
+        = f.label :start_time
+        = f.datetime_field :start_time, {minute_step: 15}
+      .parkform
+        = f.label :end_time
+        = f.datetime_field :end_time
+    .row
+      = f.submit "park create", class: "btn btn-outline-primary"
