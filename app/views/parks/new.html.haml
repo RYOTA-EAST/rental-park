@@ -1,4 +1,6 @@
 .container
+  = form_with url: postal_change_parks_path, method: :get, local: true do |f|
+    = f.text_field :postal_code, class: "search_form", placeholder: "郵便番号を入力してください"
   = form_with model: @park, local: true do |f|
     = render 'layouts/error_messages', model: f.object
     .row
@@ -12,8 +14,9 @@
       .form
         = f.label :postal_code
         = f.text_field :postal_code
+
     .row
-      .form
+      .form        
         = f.label :prefecture_code
         = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {}, {class:"prefecture-select"})
       .form

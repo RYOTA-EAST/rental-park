@@ -41,6 +41,23 @@ class ParksController < ApplicationController
     end
   end
 
+  def postal_change
+    @park = Park.new
+    if postal_code = params[:postal_code]
+      params = URI.encode_www_form({zipcode: postal_code})
+      uri = URI.parse("http://zipcloud.ibsnet.co.jp/api/search?#{params}")
+      response = Net::HTTP.get_response(uri)
+      result = JSON.parse(response.body)
+      if result["results"]
+        @park.postal_code = result["results"][0]["zipcode"]
+        @park.prefecture_code = result["results"][0]["prefcode"]
+        @park.city = result["results"][0]["address2"]
+        @park.street = result["results"][0]["address3"]
+      end
+    end
+    render :new
+  end
+
   private
 
   def park_params
