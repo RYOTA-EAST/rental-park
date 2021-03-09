@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     sessions:      'users/sessions',
     registrations: 'users/registrations'
   }
-  resources :parks
+  resources :parks do
+    collection do
+      get :postal_change
+    end
+  end
 
 end

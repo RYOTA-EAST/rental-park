@@ -8,7 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-require("../jquery.jpostal")
+require('../jquery.jpostal')
 require('../test')
 
 
@@ -24,6 +24,6 @@ require('../test')
 //= require jquery_ujs
 //= require popper
 //= require bootstrap-sprockets
-//= require jquery.jpostal 
-//= require test
+//= require ../jquery.jpostal 
+//= require ../test
 //= require_tree .
