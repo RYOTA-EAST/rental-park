@@ -12,9 +12,9 @@
 |last_name_kana     |string  |null: false                    |
 |first_name_kana    |string  |null: false                    |
 |postal_code        |string  |null: false                    |
-|prefecture_id      |integer |null: false                    |
+|prefecture_code    |integer |null: false                    |
 |city               |string  |null: false                    |
-|address            |string  |null: false                    |
+|street             |string  |null: false                    |
 |explosive          |string  |                               |
 |phone_number       |string  |null: false                    |
 
@@ -45,9 +45,9 @@
 |name               |string         |null: false                    |
 |number             |integer        |null: false                    |
 |postal_code        |string         |null: false                    |
-|prefecture_id      |integer        |null: false                    |
+|prefecture_code    |integer        |null: false                    |
 |city               |string         |null: false                    |
-|address            |string         |null: false                    |
+|street             |string         |null: false                    |
 |explosive          |string         |                               |
 |unit_price         |integer        |null: false                    |
 |start_time         |datetime       |null: false                    |

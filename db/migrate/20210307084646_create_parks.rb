@@ -6,9 +6,9 @@ class CreateParks < ActiveRecord::Migration[6.0]
         t.string :name
         t.integer :number
         t.string :postal_code
-        t.integer :prefecture_id
+        t.integer :prefecture_code
         t.string :city
-        t.string :address
+        t.string :street
         t.integer :unit_price
         t.datetime :start_time
         t.datetime :end_time

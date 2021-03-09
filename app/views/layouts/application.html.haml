@@ -18,7 +18,7 @@
             = link_to 'ログアウト', destroy_user_session_path, method: :delete, role:"button", class: ["logout","btn","btn-danger"]
           - else
             = link_to 'ログイン', new_user_session_path, role: "button", class: ["login","btn","btn-primary"]
-            = link_to '新規登録', new_user_registration_path, role: "button", class: ["sign-up","btn","btn-success"]
+            = link_to '新規登録', new_user_registration_path, role: "button", class: ["sign-up","btn","btn-success"],data: {"turbolinks"=>false}
   %body
     = yield
   %footer.fixed-bottom.text-center.bg-info.text-white
