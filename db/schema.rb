@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 2021_03_07_084646) do
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
     t.string "postal_code", default: "", null: false
-    t.integer "prefecture_id", null: false
+    t.integer "prefecture_code", null: false
     t.string "city", default: "", null: false
-    t.string "address", default: "", null: false
+    t.string "street", default: "", null: false
     t.string "explosive", default: "", null: false
     t.string "phone_number", default: "", null: false
     t.string "reset_password_token"
@@ -39,13 +39,13 @@ ActiveRecord::Schema.define(version: 2021_03_07_084646) do
     t.string "name"
     t.integer "number"
     t.string "postal_code"
-    t.integer "prefecture_id"
+    t.integer "prefecture_code"
     t.string "city"
-    t.string "explosive"
-    t.string "address"
+    t.string "street"
     t.integer "unit_price"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string "explosive"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 2021_03_07_084646) do
     t.string "first_name", default: "", null: false
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
-    t.string "postal_code", default: "", null: false
-    t.integer "prefecture_id", null: false
+    t.integer "postal_code", null: false
+    t.integer "prefecture_code", null: false
     t.string "city", default: "", null: false
-    t.string "address", default: "", null: false
+    t.string "street", default: "", null: false
     t.string "explosive", default: "", null: false
     t.string "phone_number", default: "", null: false
     t.string "reset_password_token"

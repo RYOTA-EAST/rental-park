@@ -6,8 +6,21 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable
   has_many :parks
 
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+ 
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+ 
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+  
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
 
-  validates :prefecture_id, numericality: { other_than: 1 }
+  validates :prefecture_code, numericality: { other_than: 1 }
+
+
 end

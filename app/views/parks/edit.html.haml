@@ -15,13 +15,13 @@
     .row
       .form
         = f.label :prefecture
-        = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
+        = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :name, :name, {}, {class:"prefecture-select"})
       .form
         = f.label :city
         = f.text_field :city
       .form
-        = f.label :address
-        = f.text_field :address
+        = f.label :street
+        = f.text_field :street
       .form
         = f.label :explosive
         = f.text_field :explosive

@@ -62,3 +62,5 @@ gem 'bootstrap'
 gem 'jquery-rails'
 
 gem 'active_hash'
+
+gem 'jp_prefecture' # 都道府県コードから都道府県名を変換するgem

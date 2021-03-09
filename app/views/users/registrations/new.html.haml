@@ -46,20 +46,19 @@
       .field
         = f.label :postal_code
         %br/
-        = f.text_field :postal_code, autofocus: true
-    .row
+        = f.text_field :postal_code, autofocus: true, id: "user_postal_code"
       .field
-        = f.label :prefecture
+        = f.label :prefecture_code
         %br/
-        = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
+        = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {}, {class:"prefecture-select", id: "user_prefecture_code"})
       .field
         = f.label :city
         %br/
-        = f.text_field :city, autofocus: true
+        = f.text_field :city, autofocus: true, id: "user_city"
       .field
-        = f.label :address
+        = f.label :street
         %br/
-        = f.text_field :address, autofocus: true
+        = f.text_field :street, autofocus: true, id: "user_street"
       .field
         = f.label :explosive
         %br/

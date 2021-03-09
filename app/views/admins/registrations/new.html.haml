@@ -50,17 +50,17 @@
         = f.text_field :postal_code, autofocus: true
     .row
       .field
-        = f.label :prefecture
+        = f.label :prefecture_code
         %br/
-        = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
+        = f.collection_select(:prefecture_code, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
       .field
         = f.label :city
         %br/
         = f.text_field :city, autofocus: true
       .field
-        = f.label :address
+        = f.label :street
         %br/
-        = f.text_field :address, autofocus: true
+        = f.text_field :street, autofocus: true
       .field
         = f.label :explosive
         %br/
