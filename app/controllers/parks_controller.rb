@@ -4,6 +4,7 @@ class ParksController < ApplicationController
   
   def index
     @park_all = Park.all
+    gon.parks = Park.all
   end
 
   def new
