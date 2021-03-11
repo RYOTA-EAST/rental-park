@@ -1,13 +1,79 @@
 .container
-  %h1 Park#index
-  = link_to '新規作成', new_park_path
-  %h1 駐車場一覧
+  .row
+    %h1 駐車場一覧
+    = link_to '新規作成', new_park_path, class: ["btn","btn-primary"]
   .row 
-    - @park_all.each do |park|
-      .col-3
+    .col-6
+      - @park_all.each do |park|
         = link_to park_path(park.id) do
           .card
             .card-body
-              %h5= "名前：#{park.name}"
-              %h6= "単価：#{park.unit_price}"
-              %p= "提供者：#{park.user.nickname}"
+              .row
+                %p= "#{park.name}"
+                %p= "(15分：#{park.unit_price}円)"
+              %p= "住所：#{park.street}"
+    .col-6
+      #map
+:css
+  #map {
+    height: 700px;
+    width: 500px;
+
+  }
+:javascript
+  let map
+  let geocoder
+  let marker = []; // マーカーを複数表示させたいので、配列化
+  let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
+  const parks = gon.parks; // コントローラーで定義したインスタンス変数を変数に代入
+  
+  
+  function initMap(){
+      // geocoderを初期化
+      geocoder = new google.maps.Geocoder()
+      // mapの初期位置設定
+      map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -35.6809591, lng: 139.7673068},
+      zoom: 16
+      });
+      // forは繰り返し処理
+      // 変数iを0と定義し、
+      // その後gonで定義したusers分繰り返し加える処理を行う
+      for (let i = 0; i < parks.length; i++) {
+          // geocoderで addressの経緯緯度取得
+          // users[i]は変数iのユーザーを取得している
+          geocoder.geocode( { 'address': parks[i].city + parks[i].street }, function(results, status) {
+              // statusがOKであれば
+          if (status == 'OK') {
+      　　　　// map.setCenterで地図が移動
+              map.setCenter(results[0].geometry.location);
+              marker[i] = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+              // 変数iを変数idに代入
+              let id = parks[i]['id']
+              // infoWindowは吹き出し
+              infoWindow[i] = new google.maps.InfoWindow({
+              // contentで中身を指定
+              // 今回は文字にリンクを貼り付けた形で表示
+              content: `<a href='/parks/${id}'>${parks[i].name}</a>`
+              });
+              // markerがクリックされた時、
+              marker[i].addListener("click", function(){
+                  // infoWindowを表示
+                  infoWindow[i].open(map, marker[i]);
+              });
+          } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+          }
+          });
+      }
+  }
+  
+  function codeAddress(){
+      // 入力を取得
+      let inputAddress = document.getElementById('address').value;
+      // geocodingしたあとmapを移動
+  }
+%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&libraries=places&callback=initMap"}

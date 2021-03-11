@@ -1,7 +1,7 @@
 $(function () {
-  $(document).on("mouseover", "h2", function () {
+  $(document).on("mouseover", "h1", function () {
     $(this).css({ "color": "blue" });
-  }).on("mouseout", "h2", function () {
+  }).on("mouseout", "h1", function () {
     $(this).css({ "color": "" });
   })
 });
