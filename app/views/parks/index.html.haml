@@ -11,7 +11,8 @@
               .row
                 %p= "#{park.name}"
                 %p= "(15分：#{park.unit_price}円)"
-              %p= "住所：#{park.street}"
+              .row
+                %p= "#{park.street}"
     .col-6
       #map
 :css
