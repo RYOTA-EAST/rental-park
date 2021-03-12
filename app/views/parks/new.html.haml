@@ -35,9 +35,9 @@
     .row
       .form
         = f.label :start_time
-        = f.datetime_field :start_time, {minute_step: 15}
+        = f.datetime_select :start_time, minute_step: 15
       .parkform
         = f.label :end_time
-        = f.datetime_field :end_time
+        = f.datetime_select :end_time, minute_step: 15
     .row
       = f.submit "park create", class: "btn btn-outline-primary"
