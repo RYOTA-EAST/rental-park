@@ -24,4 +24,4 @@ require('../test')
 //= require bootstrap-sprockets
 //= require ../jquery.jpostal 
 //= require ../test
-//= require_tree .
+// require_tree .
