@@ -69,3 +69,8 @@ gem 'dotenv-rails'
 gem 'geocoder'
 
 gem 'gon'
+
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
+
+gem 'simple_calendar'

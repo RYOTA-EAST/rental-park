@@ -30,16 +30,13 @@
           %td= @park_find.unit_price
         %tr 
           %td 期間
-          %td
-            .stert_time="#{@park_find.start_time.strftime("%Y年%m月%d日%H:%M")}"
-            .beetween="〜"
-            .end_time="#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
-    .col
-      #calendar
-        = month_calendar do |date|
-          = date.day
-          - if @park_find.start_time < date + 1 && @park_find.end_time >= date
-            = "○"
+          %td= "#{@park_find.start_time.strftime("%Y年%m月%d日%H:%M")}〜#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
+    -# .col
+    -#   #calendar
+    -#     = month_calendar do |date|
+    -#       = date.day
+    -#       - if @park_find.start_time < date + 1 && @park_find.end_time >= date
+    -#         = "○"
     .col
       .row
         .simple-calendar
@@ -68,12 +65,12 @@
             -0.step(45,15) do |m|
               - if @park_find.start_time.day == date.day
                 - if !(@park_find.start_time.hour <= h)
-                  - out = "×"
+                  - out = "×#{@park_find.start_time.hour}#{@park_find.start_time.min}#{h}:#{m}"
                 - elsif(@park_find.start_time.min <= m)
-                  -out = "○"
+                  -out = "○#{@park_find.start_time.hour}#{@park_find.start_time.min}>#{h}:#{m}"
               - if @park_find.end_time.day == date.day
                 - if (@park_find.end_time.hour <= h) && (@park_find.end_time.min <= m)
-                  -out = "×"
+                  -out = "×#{@park_find.end_time.hour}#{@park_find.end_time.min}>#{h}:#{m}"
               - if m == 0
                 .time{class: "#{h}:00"}
                   = out
