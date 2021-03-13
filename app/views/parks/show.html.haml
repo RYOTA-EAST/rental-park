@@ -29,9 +29,12 @@
         %tr 
           %td 期間
           %td
-            .stert_time="#{@park_find.start_time.strftime("%Y年%m月%d日%H:%M")}"
-            .beetween="〜"
-            .end_time="#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
+            .stert_time
+              = "#{@park_find.start_time.strftime("%Y年%m月%d日%H:%M")}"
+            .beetween
+              = "〜"
+            .end_time
+              = "#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
     .col
       #calendar
         = month_calendar do |date|
