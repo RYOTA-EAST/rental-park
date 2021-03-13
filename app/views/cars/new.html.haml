@@ -1,0 +1,23 @@
+.container
+  = form_with model: @car, local: true do |f|
+    = render 'layouts/error_messages', model: f.object
+    .row
+      .form
+        = f.label :vehicle_type
+        = f.text_field :vehicle_type
+      .form
+        = f.label :city
+        = f.text_field :city
+    .row
+      .form
+        = f.label :class_number
+        = f.text_field :class_number
+    .row
+      .form        
+        = f.label :registration_type
+        = f.text_field :registration_type
+      .form
+        = f.label :designated_number
+        = f.text_field :designated_number
+    .row
+      = f.submit "park create", class: "btn btn-outline-primary"

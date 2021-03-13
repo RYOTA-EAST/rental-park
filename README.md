@@ -27,11 +27,11 @@
 
 |Column             |Type           |Options                        |
 |-------------------|---------------|-------------------------------|
-|type               |string         |null: false                    |
+|vehicle_type       |string         |null: false                    |
 |city               |string         |null: false                    |
-|class_number       |integer        |null: false, unique: true      |
+|class_number       |integer        |null: false                    |
 |registration_type  |string         |null: false                    |
-|designated_number  |integer        |null: false, unique: true      |
+|designated_number  |integer        |null: false                    |
 |user               |references     |null: false, foreign_key: true |
 
 ## Association

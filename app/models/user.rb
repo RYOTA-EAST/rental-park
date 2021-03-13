@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
   has_many :parks
+  has_many :cars
 
   include JpPrefecture
   jp_prefecture :prefecture_code
