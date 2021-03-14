@@ -4,6 +4,9 @@
     = render 'layouts/error_messages', model: f.object
     .row
       .form
+        = f.file_field :image, id:"item-image"
+    .row
+      .form
         = f.label :vehicle_type
         = f.text_field :vehicle_type
       .form

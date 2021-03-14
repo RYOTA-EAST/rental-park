@@ -4,10 +4,11 @@
     = link_to '新規登録', new_car_path, class:["btn","btn-primary"]
   .row
     - @car.each do |car|
-      .col-3
+      .col-6
         =link_to '削除', car_path(car.id), method: :delete, class: "btn btn-danger"
         = link_to edit_car_path(car.id) do
           .card
+            = image_tag car.image, width: "100%", height: "300" if car.image.attached?
             .card-body
               .row
                 %p= "#{car.vehicle_type}"
@@ -17,5 +18,3 @@
               .row
                 %p= "#{car.registration_type}"
                 %p= "#{car.designated_number}"
-
-

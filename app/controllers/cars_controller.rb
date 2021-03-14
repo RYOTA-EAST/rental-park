@@ -12,7 +12,7 @@ class CarsController < ApplicationController
   def create
     @car = Car.new(car_params)
     if @car.save
-      redirect_to root_path
+      redirect_to cars_path
     else
       render :new
     end
@@ -40,7 +40,7 @@ class CarsController < ApplicationController
 
   private
   def car_params
-    params.require(:car).permit(:vehicle_type, :city, :class_number, :registration_type, :designated_number).merge(user_id: current_user.id)
+    params.require(:car).permit(:vehicle_type, :city, :class_number, :registration_type, :designated_number, :image).merge(user_id: current_user.id)
   end
 
   def set_car_params
