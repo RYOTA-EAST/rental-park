@@ -1,10 +1,12 @@
+= javascript_include_tag "preview"
 .container
   %h1 新規登録
   = form_with model: @car, local: true do |f|
     = render 'layouts/error_messages', model: f.object
     .row
       .form
-        = f.file_field :image, id:"item-image"
+        = f.file_field :image, id:"car_image"
+        #image-list
     .row
       .form
         = f.label :vehicle_type

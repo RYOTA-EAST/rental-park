@@ -7,7 +7,6 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-require('../jquery.jpostal')
 require('../test')
 
 
@@ -24,4 +23,3 @@ require('../test')
 //= require bootstrap-sprockets
 //= require ../jquery.jpostal 
 //= require ../test
-// require_tree .
