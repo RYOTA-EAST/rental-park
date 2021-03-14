@@ -68,9 +68,12 @@ gem 'jp_prefecture' # 都道府県コードから都道府県名を変換するg
 gem 'dotenv-rails'
 gem 'geocoder'
 
-gem 'gon'
+gem 'gon' #controllerからjsに変数を渡す
 
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 
 gem 'simple_calendar'
+
+gem 'mini_magick' #画像を保存する
+gem 'image_processing'

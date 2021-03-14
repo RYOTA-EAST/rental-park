@@ -1,0 +1,19 @@
+.container 
+  .row
+    %h1 マイカー一覧
+    = link_to '新規登録', new_car_path, class:["btn","btn-primary"]
+  .row
+    - @car.each do |car|
+      .col-4
+        = link_to car_path(car.id) do
+          .card
+            = image_tag car.vehicle_image, width: "100%", height: "200" if car.vehicle_image.attached?
+            .card-body
+              .row
+                %p= "#{car.vehicle_type}"
+              .row
+                %p= "#{car.city}"           
+                %p= "#{car.class_number}"
+              .row
+                %p= "#{car.registration_type}"
+                %p= "#{car.designated_number}"
