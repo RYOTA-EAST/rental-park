@@ -1,5 +1,5 @@
+%h1 編集
 .container
-  %h1 新規登録
   = form_with model: @car, local: true do |f|
     = render 'layouts/error_messages', model: f.object
     .row
@@ -21,4 +21,4 @@
         = f.label :designated_number
         = f.text_field :designated_number
     .row
-      = f.submit "park create", class: "btn btn-outline-primary"
+      = f.submit "park update", class: "btn btn-outline-primary"

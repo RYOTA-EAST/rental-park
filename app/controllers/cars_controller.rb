@@ -23,7 +23,11 @@ class CarsController < ApplicationController
   end
 
   def update
-    
+    if @car.update(car_params)
+      redirect_to cars_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -36,6 +40,6 @@ class CarsController < ApplicationController
   end
 
   def set_car_params
-    
+    @car = Car.find(params[:id])
   end
 end
