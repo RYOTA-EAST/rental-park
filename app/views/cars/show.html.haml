@@ -1,0 +1,31 @@
+.container 
+  .row 
+    .col-10
+      %h5 詳細ページ
+    .col 
+      =link_to '編集', edit_car_path(params[:id]), class: "btn btn-primary"
+      =link_to '削除', car_path(params[:id]), method: :delete, class: "btn btn-danger"
+
+  .row
+    .col
+      %h5 Vehicle Image
+      = image_tag @car.vehicle_image, height: "300" if @car.vehicle_image.attached?
+    .col
+      %h5 Number Image
+      = image_tag @car.number_image, height: "300" if @car.vehicle_image.attached?
+  
+  .row
+    .col
+      %table.table.text-center
+        %tr 
+          %th 項目
+          %th 内容
+        %tr 
+          %td 車種
+          %td= @car.vehicle_type
+        %tr 
+          %td 地域 分類番号
+          %td= "#{@car.city} #{@car.class_number}"
+        %tr 
+          %td 登録分類 ナンバー
+          %td= "#{@car.registration_type} #{@car.designated_number}"

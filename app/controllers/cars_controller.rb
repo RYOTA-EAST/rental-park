@@ -1,6 +1,6 @@
 class CarsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_car_params, only: [:edit, :update, :destroy]
+  before_action :set_car_params, only: [:show, :edit, :update, :destroy]
   def index
     @car = Car.where(user_id: current_user.id)
   end
