@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     sessions:      'users/sessions',
     registrations: 'users/registrations'
   }
-  resources :cars, only: [:new, :create, :edit, :update, :destroy]
+  resources :cars, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :parks do
     collection do
       get :postal_change

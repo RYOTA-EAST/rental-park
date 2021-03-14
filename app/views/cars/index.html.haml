@@ -1,0 +1,18 @@
+.container 
+  .row
+    %h1 マイカー一覧
+  .row
+    - @car.each do |car|
+      .col-3
+        = link_to root_path do
+          .card
+            .card-body
+              .row
+                %p= "#{car.vehicle_type}"
+              .row
+                %p= "#{car.city}"           
+                %p= "#{car.class_number}"
+              .row
+                %p= "#{car.registration_type}"
+                %p= "#{car.designated_number}"
+

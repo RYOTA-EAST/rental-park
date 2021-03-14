@@ -16,6 +16,7 @@
         .login-user
           - if user_signed_in?
             = "USER名：#{current_user.nickname}"
+            = link_to 'マイカー' , cars_path, method: :get ,class: ["logout","btn","btn-success"]
             = link_to 'ログアウト', destroy_user_session_path, method: :delete, role:"button", class: ["logout","btn","btn-danger"]
           - else
             = link_to 'ログイン', new_user_session_path, role: "button", class: ["login","btn","btn-primary"]
