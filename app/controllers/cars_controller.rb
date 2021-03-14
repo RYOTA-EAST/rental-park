@@ -31,7 +31,11 @@ class CarsController < ApplicationController
   end
 
   def destroy
-    
+    if @car.destroy
+      redirect_to cars_path
+    else
+      render :index
+    end
   end
 
   private
