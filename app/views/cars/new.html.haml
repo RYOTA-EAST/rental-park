@@ -5,8 +5,13 @@
     = render 'layouts/error_messages', model: f.object
     .row
       .form
-        = f.file_field :image, id:"car_image"
-        #image-list
+        = f.label :number_image
+        = f.file_field :number_image, id:"number_image"
+        #number-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
+      .form
+        = f.label :vehicle_image
+        = f.file_field :vehicle_image, id:"vehicle_image"
+        #vehicle-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
     .row
       .form
         = f.label :vehicle_type
