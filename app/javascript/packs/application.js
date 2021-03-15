@@ -17,9 +17,23 @@ require('../test')
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-//= require jquery3
+//= require jquery
 //= require jquery_ujs
 //= require popper
 //= require bootstrap-sprockets
 //= require ../jquery.jpostal 
 //= require ../test
+
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
+document.addEventListener('turbolinks:load', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new Calendar(calendarEl, {
+    plugins: [ dayGridPlugin, interactionPlugin ]
+  });
+
+  calendar.render();
+});

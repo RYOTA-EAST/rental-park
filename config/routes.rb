@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :cars
+  resources :events
   resources :parks do
     collection do
       get :postal_change
