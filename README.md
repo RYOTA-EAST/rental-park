@@ -19,7 +19,7 @@
 |phone_number       |string  |null: false                    |
 
 ## Association
-- has_many :rentals
+- has_many :events
 - has_many :cars
 - has_many :parks
 
@@ -37,6 +37,7 @@
 ## Association
 - belongs_to :user
 - has_many :parks
+- has_many :events
 
 # Parksテーブル
 
@@ -57,7 +58,7 @@
 ## Association
 - belongs_to :user
 - has_many :unusable_times
-- has_many :rentals
+- has_many :events
 
 # Unusable_timesテーブル
 
@@ -70,12 +71,12 @@
 ## Association
 - belongs_to :park
 
-# Rentalsテーブル
+# Eventsテーブル
 
 |Column             |Type           |Options                        |
 |-------------------|---------------|-------------------------------|
-|start_time         |datetime       |null: false                    |
-|end_time           |datetime       |null: false                    |
+|start_date         |datetime       |null: false                    |
+|end_date           |datetime       |null: false                    |
 |park               |references     |null: false, foreign_key: true |
 |user               |references     |null: false, foreign_key: true |
 |car                |references     |null: false, foreign_key: true |
