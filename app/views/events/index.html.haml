@@ -1,6 +1,23 @@
-%h1 Events#index
-%p Find me in app/views/events/index.html.haml
-
-#calendar
-= javascript_pack_tag 'calendar/event'
-
+.container 
+  .row
+    .col
+      %table.table.text-center
+        %tr 
+          %th 駐車場名
+          %th 開始時間
+          %th 終了時間
+          %th 借用時間(時間：分)
+          %th 支払い金額
+          %th 車両
+        - @event.each do |event|
+          - use_time = (event.end_date - event.start_date).to_i / 60
+          - use_hour = use_time / 60
+          - use_min = use_time - (use_hour * 60)
+          - use_min = "00" if use_min == 0
+          %tr 
+            %td= link_to event.park.name, park_path(event.park.id)
+            %td= event.start_date
+            %td= event.end_date
+            %td= "#{use_hour}:#{use_min}"
+            %td= use_time / 15 * event.park.unit_price
+            %td= link_to event.car.vehicle_type, car_path(event.car.id)

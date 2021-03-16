@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :cars
+  resources :events, only: :index
   resources :parks do
-    resources :events
+    resources :events, except: :index
     collection do
       get :postal_change
     end
