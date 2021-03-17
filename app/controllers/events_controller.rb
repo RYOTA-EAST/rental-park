@@ -43,6 +43,7 @@ class EventsController < ApplicationController
   private
   def event_params
     params.require(:event).permit(:start_date, :end_date, :car_id).merge(park_id: params[:park_id], user_id: current_user.id)
+    params.require(:event).permit(:start_date, :end_date, :memo, :cancel_flag, :car_id).merge(park_id: params[:park_id], user_id: current_user.id)
   end
 
   def set_event_params

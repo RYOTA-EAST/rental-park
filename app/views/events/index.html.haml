@@ -2,22 +2,32 @@
   .row
     .col
       %table.table.text-center
-        %tr 
+        %tr
           %th 駐車場名
           %th 開始時間
           %th 終了時間
+          %th メモ
           %th 借用時間(時間：分)
           %th 支払い金額
           %th 車両
+          %th キャンセル
         - @event.each do |event|
           - use_time = (event.end_date - event.start_date).to_i / 60
           - use_hour = use_time / 60
           - use_min = use_time - (use_hour * 60)
           - use_min = "00" if use_min == 0
-          %tr 
+        
+          %tr
             %td= link_to event.park.name, park_path(event.park.id)
-            %td= event.start_date
-            %td= event.end_date
+            %td= event.start_date.strftime("%Y年%m月%d日%H:%M")
+            %td= event.end_date.strftime("%Y年%m月%d日%H:%M")
+            %td= event.memo
             %td= "#{use_hour}:#{use_min}"
             %td= use_time / 15 * event.park.unit_price
             %td= link_to event.car.vehicle_type, car_path(event.car.id)
+            %td
+              - if event.cancel_flag == true
+                = "キャンセル済み"
+              - else
+                = link_to "有効", park_event_path(park_id:event.park.id,id: event.id)
+

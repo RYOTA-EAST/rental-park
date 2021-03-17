@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2021_03_15_112249) do
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
+    t.text "memo"
+    t.boolean "cancel_flag", default: false, null: false
     t.bigint "park_id"
     t.bigint "user_id"
     t.bigint "car_id"
