@@ -23,11 +23,12 @@ class EventsController < ApplicationController
   end
   
   def edit
+    @park_find = Park.find(params[:park_id])
   end
   
   def update
-    if @event_find.update(event_params)
-      redirect_to park_path
+    if @event.update(event_params)
+    redirect_to park_event_path(park_id: params[:park_id], id: params[:id])
     else
       render :edit
     end
@@ -42,7 +43,6 @@ class EventsController < ApplicationController
   end
   private
   def event_params
-    params.require(:event).permit(:start_date, :end_date, :car_id).merge(park_id: params[:park_id], user_id: current_user.id)
     params.require(:event).permit(:start_date, :end_date, :memo, :cancel_flag, :car_id).merge(park_id: params[:park_id], user_id: current_user.id)
   end
 
