@@ -1,0 +1,59 @@
+.container 
+  .row
+    .col
+      %table.table.text-center
+        %tr
+          %th ステータス
+          %th 駐車場名
+          %th 車両
+          %th 開始時間
+          %th 終了時間
+          %th updated_at
+          %th メモ
+          %th 借用時間(時間：分)
+          %th 駐車金額
+          %th 支払い金額
+        - total = 0
+        - @event.each do |event|
+          - use_time = (event.end_date - event.start_date).to_i / 60
+          - use_hour = use_time / 60
+          - use_min = use_time - (use_hour * 60)
+          - use_min = "00" if use_min == 0
+        
+          %tr
+            %td
+              - burden_ratio = 1
+              - if event.cancel_flag == true
+                .text-danger
+                  = "キャンセル済み"
+                - if (event.start_date.to_date - event.updated_at.to_date).to_i < 1
+                  .text-danger
+                    = "100％負担"
+                - elsif (event.start_date.to_date - event.updated_at.to_date).to_i <= 3
+                  .text-danger
+                    = "50％負担"
+                    - burden_ratio = 0.5
+                - else
+                  .text-danger
+                    = "0％負担"
+                    - burden_ratio = 0
+              - elsif event.start_date > DateTime.now
+                = link_to "借用予定", park_event_path(park_id:event.park.id,id: event.id)
+              - elsif event.end_date < DateTime.now
+                = "借用済み"
+              - else
+                = link_to "借用中", park_event_path(park_id:event.park.id,id: event.id)
+
+            %td= link_to event.park.name, park_path(event.park.id)
+            %td= link_to event.car.vehicle_type, car_path(event.car.id)
+            %td= event.start_date.strftime("%Y年%m月%d日%H:%M")
+            %td= event.end_date.strftime("%Y年%m月%d日%H:%M")
+            %td= event.updated_at.strftime("%Y年%m月%d日%H:%M")
+            %td= event.memo
+            %td= "#{use_hour}:#{use_min}"
+            %td= use_time / 15 * event.park.unit_price
+            %td= (use_time / 15 * event.park.unit_price * burden_ratio).to_i
+          -total= (total + use_time / 15 * event.park.unit_price * burden_ratio)
+  .row
+    .text-right
+      %h1= "合計：#{total.to_i}円"

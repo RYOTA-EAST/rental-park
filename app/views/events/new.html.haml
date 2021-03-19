@@ -1,0 +1,82 @@
+.container
+  %h1 借用登録
+  .row
+    .col-6
+      %table.table.text-center
+        %tr 
+          %th 項目
+          %th 内容
+        %tr 
+          %td 名前
+          %td= @park_find.name
+        %tr 
+          %td No
+          %td= @park_find.number
+        %tr 
+          %td 郵便番号
+          %td= @park_find.postal_code
+        %tr 
+          %td 住所
+          %td#address= @park_find.city + @park_find.street + @park_find.explosive
+        %tr 
+          %td 単価
+          %td= @park_find.unit_price
+        %tr 
+    .col-6
+      = form_with model: [@park_find, @event], local: true do |f|
+        = render 'layouts/error_messages', model: f.object
+        .form
+          = f.label :駐車車両, class: 'roster-label'
+          = f.collection_select(:car_id, Car.where(user_id: current_user.id), :id, :vehicle_type)
+        .form
+          = f.label :start_date
+          = f.datetime_select :start_date, minute_step: 15
+        .form
+          = f.label :end_date
+          = f.datetime_select :end_date, minute_step: 15
+        .form
+          = f.label :memo
+          = f.text_field :memo
+        -# .form
+        -#   = f.label :cancel_flag
+        -#   = f.check_box :cancel_flag
+        = f.submit "rental create!", class: "btn btn-outline-primary"
+      .row
+        .simple-calendar
+          .calendar-heading
+            %span= "3月"
+            %table.table-striped
+              %thead 
+                %th= "時間"
+              %tbody 
+                %tr 
+                  %td
+                    = "日付"
+                    - (0..23).each do |hh|
+                      -0.step(45,15) do |mm|
+                        - if mm == 0
+                          .time= "#{hh}:00"
+                        - else
+                          .time= "#{hh}:#{mm}"
+        = week_calendar do |date|
+          = date.day
+          - if @park_find.start_time < date + 1 && @park_find.end_time >= date
+            - out = "○" 
+          - else
+            - out = "×"
+          - (0..23).each do |h|
+            -0.step(45,15) do |m|
+              - if @park_find.start_time.day == date.day
+                - if !(@park_find.start_time.hour <= h)
+                  - out = "×"
+                - elsif(@park_find.start_time.min <= m)
+                  -out = "○"
+              - if @park_find.end_time.day == date.day
+                - if (@park_find.end_time.hour <= h) && (@park_find.end_time.min <= m)
+                  -out = "×"
+              - if m == 0
+                .time{class: "#{h}:00"}
+                  = out
+              - else
+                .time{class: "#{h}:#{m}"}
+                = out

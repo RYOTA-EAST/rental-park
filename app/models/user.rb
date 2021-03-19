@@ -6,6 +6,7 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable
   has_many :parks
   has_many :cars
+  has_many :events
 
   include JpPrefecture
   jp_prefecture :prefecture_code

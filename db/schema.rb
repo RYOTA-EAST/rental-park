@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_065358) do
+ActiveRecord::Schema.define(version: 2021_03_15_112249) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -68,6 +68,21 @@ ActiveRecord::Schema.define(version: 2021_03_14_065358) do
     t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text "memo"
+    t.boolean "cancel_flag", default: false, null: false
+    t.bigint "park_id"
+    t.bigint "user_id"
+    t.bigint "car_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["car_id"], name: "index_events_on_car_id"
+    t.index ["park_id"], name: "index_events_on_park_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
   create_table "parks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "number"
@@ -110,5 +125,8 @@ ActiveRecord::Schema.define(version: 2021_03_14_065358) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cars", "users"
+  add_foreign_key "events", "cars"
+  add_foreign_key "events", "parks"
+  add_foreign_key "events", "users"
   add_foreign_key "parks", "users"
 end
