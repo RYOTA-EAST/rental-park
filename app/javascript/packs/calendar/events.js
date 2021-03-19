@@ -2,7 +2,7 @@
 import { Calendar} from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import monthGridPlugin from '@fullcalendar/daygrid'
-import googleCalendarApi from '@fullcalendar/google-calendar'
+// import googleCalendarApi from '@fullcalendar/google-calendar'
 
 //<div id='calendar'></div>のidからオブジェクトを定義してカレンダーを作っていきます。
 document.addEventListener('turbolinks:load', function() {
