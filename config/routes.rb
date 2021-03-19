@@ -9,7 +9,12 @@ Rails.application.routes.draw do
   resources :cars
   resources :events, only: :index
   resources :parks do
-    resources :events, except: :index
+    resources :events, except: :index do
+      member do
+        put :cancel
+        patch :cancel
+      end
+    end
     collection do
       get :postal_change
     end

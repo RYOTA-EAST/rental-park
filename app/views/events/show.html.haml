@@ -3,8 +3,9 @@
     .col-10
       %h5 詳細ページ
     .col 
-      =link_to '編集', edit_park_event_path(park_id:params[:park_id], id: params[:id]), class: "btn btn-primary"
-      =link_to '削除', park_event_path(params[:id]), method: :delete, class: "btn btn-danger"
+      - if @event.start_date.to_date >= Date.today + 3
+        =link_to '編集', edit_park_event_path(park_id:params[:park_id], id: params[:id]), class: "btn btn-primary"
+      =link_to 'キャンセル', cancel_park_event_path(park_id:params[:park_id], id: params[:id]),method: :patch ,class: "btn btn-danger"
 
 .container 
   .row
@@ -18,7 +19,8 @@
           %th 借用時間(時間：分)
           %th 支払い金額
           %th 車両
-          %th キャンセル
+          %th キャンセルした場合
+          %th キャンセル費用
           - use_time = (@event.end_date - @event.start_date).to_i / 60
           - use_hour = use_time / 60
           - use_min = use_time - (use_hour * 60)
@@ -34,8 +36,12 @@
             %td
               - if (@event.start_date.to_date  - Date.today).to_i < 1
                 = "100％負担"
+                %td= use_time / 15 * @event.park.unit_price
               - elsif (@event.start_date.to_date  - Date.today).to_i <= 3
                 = "50％負担"
+                %td=(use_time / 15 * @event.park.unit_price * 0.5).to_i
               - else
                 = "0％負担"
+            %td
+
 

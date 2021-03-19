@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event_params, only: [:show, :edit, :update, :destroy]
+  before_action :set_event_params, only: [:show, :edit, :update, :cancel]
   def index
     @event = Event.where(user_id: current_user.id).includes(:park, :car).order(start_date: "DESC")
   end
@@ -34,16 +34,23 @@ class EventsController < ApplicationController
     end
   end
   
-  def destroy
-    if @event.destroy
-      redirect_to root_path
+  def cancel
+    @event = Event.find(params[:id])
+    @event.cancel_flag = TRUE
+    if @event.update(event_params_cancel)
+      redirect_to events_path
     else
       render :index
     end
   end
+
+
   private
   def event_params
     params.require(:event).permit(:start_date, :end_date, :memo, :cancel_flag, :car_id).merge(park_id: params[:park_id], user_id: current_user.id)
+  end
+  def event_params_cancel
+    params.permit(:start_date, :end_date, :memo, :cancel_flag, :car_id).merge(park_id: params[:park_id], user_id: current_user.id)
   end
 
   def set_event_params
