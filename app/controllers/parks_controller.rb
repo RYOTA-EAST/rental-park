@@ -71,7 +71,7 @@ class ParksController < ApplicationController
   private
 
   def park_params
-    params.require(:park).permit(:name, :number, :postal_code, :prefecture_code, :city, :street, :explosive, :unit_price, :start_time, :end_time).merge(user_id: current_user.id)
+    params.require(:park).permit(:name, :number, :postal_code, :prefecture_code, :city, :street, :explosive, :unit_price, :start_time, :end_time,:park_image).merge(user_id: current_user.id)
   end
   
   def set_park_params
