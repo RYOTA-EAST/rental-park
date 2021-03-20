@@ -7,15 +7,20 @@
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = include_gon
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    -# = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %header.bg-info.text-white
     .container.sticky-top
       .d-flex.justify-content-between
         .row
           %h1= link_to 'レンタパーク', root_path, class: "text-white"
+        .form
+          = form_with url: search_parks_path, method: :get, local: true do |f|
+            = f.text_field :search_word
+            = f.submit "search", class: "btn btn-light"
         .login-user
           - if user_signed_in?
             = "USER名：#{current_user.nickname}"
+            = link_to '駐車場一覧' , parks_path, method: :get ,class: ["logout","btn","btn-success"]
             = link_to 'レンタル一覧' , events_path, method: :get ,class: ["logout","btn","btn-success"]
             = link_to 'マイカー' , cars_path, method: :get ,class: ["logout","btn","btn-success"]
             = link_to 'ログアウト', destroy_user_session_path, method: :delete, role:"button", class: ["logout","btn","btn-danger"]

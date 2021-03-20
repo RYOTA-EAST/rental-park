@@ -3,8 +3,8 @@ class ParksController < ApplicationController
   before_action :set_park_params, only: [:show, :edit, :update, :destroy]
   
   def index
-    @park_all = Park.all
-    gon.parks = Park.all
+    @park_all = Park.where(user_id: current_user.id)
+    gon.parks = Park.where(user_id: current_user.id)
   end
 
   def new
@@ -57,6 +57,15 @@ class ParksController < ApplicationController
       end
     end
     render :new
+  end
+
+  def top_page
+    
+  end
+
+  def search
+    @search = params[:search_word]
+    gon.parks = Park.all
   end
 
   private

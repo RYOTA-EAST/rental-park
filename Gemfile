@@ -67,6 +67,7 @@ gem 'jp_prefecture' # 都道府県コードから都道府県名を変換するg
 
 gem 'dotenv-rails'
 gem 'geocoder'
+gem 'geokit-rails'
 
 gem 'gon' #controllerからjsに変数を渡す
 
