@@ -1,7 +1,7 @@
 .container 
   .row 
     .col-10
-      %h5 詳細ページ干
+      %h5 詳細ページ
     .col 
       - if (current_user.id == @park_find.user.id)
         = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
@@ -39,13 +39,8 @@
             .end_time
               = "#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
     .col
-      #calendar
-        = month_calendar do |date|
-          = date.day
-          - if @park_find.start_time < date + 1 && @park_find.end_time >= date
-            = "○"
-
-
+      %h5 Park Image
+      = image_tag @park_find.park_image, height: "300" if @park_find.park_image.attached?
 
   .map.text-center
     #display 何かが表示される、、、、！
