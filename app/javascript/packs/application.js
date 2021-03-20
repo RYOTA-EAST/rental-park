@@ -7,7 +7,7 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-require('../test')
+// require('../test')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -23,17 +23,18 @@ require('../test')
 //= require bootstrap-sprockets
 //= require ../jquery.jpostal 
 //= require ../test
+//= require_tree .
 
-import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+// import { Calendar } from '@fullcalendar/core';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import interactionPlugin from '@fullcalendar/interaction';
 
-document.addEventListener('turbolinks:load', function() {
-  var calendarEl = document.getElementById('calendar');
+// document.addEventListener('turbolinks:load', function() {
+//   var calendarEl = document.getElementById('calendar');
 
-  var calendar = new Calendar(calendarEl, {
-    plugins: [ dayGridPlugin, interactionPlugin ]
-  });
+//   var calendar = new Calendar(calendarEl, {
+//     plugins: [ dayGridPlugin, interactionPlugin ]
+//   });
 
-  calendar.render();
-});
+//   calendar.render();
+// });

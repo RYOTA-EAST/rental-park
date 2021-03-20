@@ -1,22 +1,7 @@
-= javascript_include_tag "test"
 .container
-  #calendar
-  .row
-    %h1 駐車場一覧
-    = link_to '新規作成', new_park_path, class: ["btn","btn-primary"]
-  .row 
-    .col-6
-      - @park_all.each do |park|
-        = link_to park_path(park.id) do
-          .card
-            .card-body
-              .row
-                %p= "#{park.name}"
-                %p= "(15分：#{park.unit_price}円)"
-              .row
-                %p= "#{park.street}"
-    .col-6
-      #map
+  %h1 serach 
+
+  #map
 :css
   #map {
     height: 700px;
@@ -36,7 +21,7 @@
       geocoder = new google.maps.Geocoder()
       // mapの初期位置設定
       map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -35.6809591, lng: 139.7673068},
+      center: {lat: -35.6809591, lng: 100.7673068},
       zoom: 16
       });
       // forは繰り返し処理
@@ -72,11 +57,15 @@
           }
           });
       }
-  }
   
-  function codeAddress(){
-      // 入力を取得
-      let inputAddress = document.getElementById('address').value;
-      // geocodingしたあとmapを移動
-  }
+    let inputAddress = "#{@search}";
+    
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+      if (status == 'OK'){
+        map.setCenter(results[0].geometry.location);
+      } else {
+        alert('該当する結果がありませんでした：' + status);
+      }
+    });
+  };
 %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&libraries=places&callback=initMap"}
