@@ -35,7 +35,7 @@ class ParksController < ApplicationController
   end
   
   def destroy
-    if @park_find.destroy
+    if @park_find.destroy!
       redirect_to root_path
     else
       render :index
@@ -65,7 +65,7 @@ class ParksController < ApplicationController
 
   def search
     @search = params[:search_word]
-    gon.parks = Park.all
+    gon.parks = Park.where.not(user_id: current_user.id)
   end
 
   private

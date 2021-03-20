@@ -1,7 +1,7 @@
 .container 
   .row 
     .col-10
-      %h5 詳細ページ
+      %h5 詳細ページ干
     .col 
       - if (current_user.id == @park_find.user.id)
         = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"

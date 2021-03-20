@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   def new
     @park_find = Park.find(params[:park_id])
     @event = Event.new
+    @events = Event.where(park_id:params[:park_id])
   end
 
   def create

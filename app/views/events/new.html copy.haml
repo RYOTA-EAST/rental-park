@@ -46,11 +46,42 @@
           = f.label :memo
           = f.text_field :memo
         = f.submit "rental create!", class: "btn btn-outline-primary"
-  .row
-    .simple-calendar
-      .calendar-heading
-        = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
-          = date
-          - event.each do |event|
-            %div
-              = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
+      .row
+        .simple-calendar
+          .calendar-heading
+            %span= "3月"
+            %table.table-striped
+              %thead 
+                %th= "時間"
+              %tbody 
+                %tr 
+                  %td
+                    = "日付"
+                    - (0..23).each do |hh|
+                      -0.step(45,15) do |mm|
+                        - if mm == 0
+                          .time= "#{hh}:00"
+                        - else
+                          .time= "#{hh}:#{mm}"
+        = week_calendar do |date|
+          = date.day
+          - if @park_find.start_time.day < date.day + 1 && @park_find.end_time.day >= date.day
+            - out = "○1" 
+          - else
+            - out = "×1"
+          - (0..23).each do |h|
+            -0.step(45,15) do |m|
+              - if @park_find.start_time.day == date.day
+                - if !(@park_find.start_time.hour <= h)
+                  - out = "×2"
+                - elsif(@park_find.start_time.min <= m)
+                  -out = "○3"
+              - if @park_find.end_time.day == date.day
+                - if (@park_find.end_time.hour <= h) && (@park_find.end_time.min <= m)
+                  -out = "×4"
+              - if m == 0
+                .time{class: "#{h}:00"}
+                  = out
+              - else
+                .time{class: "#{h}:#{m}"}
+                = out
