@@ -1,40 +1,44 @@
+= javascript_include_tag "preview_park"
+
 .container
   = form_with model: @park_find, local: true do |f|
     = render 'layouts/error_messages', model: f.object
     .row
-      .form
-        = f.label :name
-        = f.text_field :name
-      .form
-        = f.label :number
-        = f.text_field :number
-    .row
-      .form
-        = f.label :postal_code
-        = f.text_field :postal_code
-    .row
-      .form
-        = f.label :prefecture
-        = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :name, :name, {}, {class:"prefecture-select"})
-      .form
-        = f.label :city
+      .form-group.col-12    
+        = f.label :都道府県, class: "col-2 text-center"
+        = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {}, {class:"prefecture-select"})
+
+        = f.label :市町村, class: "col-1 text-center"
         = f.text_field :city
-      .form
-        = f.label :street
+
+        = f.label :番地, class: "col-1 text-center"
         = f.text_field :street
-      .form
-        = f.label :explosive
+
+        = f.label :その他, class: "col-1 text-center"
         = f.text_field :explosive
     .row
-      .form
-        = f.label :unit_price
+      .form-group.col-12 
+        = f.label :名前, class: "col-2 text-center"
+        = f.text_field :name, class: "col-3"
+        = f.label :数, class: "col-1 text-center"
+        = f.text_field :number
+    .row
+      .form-group.col-12 
+        = f.label :単価, class: "col-2 text-center"
         = f.text_field :unit_price
     .row
-      .form
-        = f.label :start_time
+      .form-group.col-12 
+        = f.label :借用開始日時, class: "col-2 text-center"
         = f.datetime_select :start_time, minute_step: 15
-      .parkform
-        = f.label :end_time
+    .row
+      .form-group.col-12  
+        = f.label :借用終了日時, class: "col-2 text-center"
         = f.datetime_select :end_time, minute_step: 15
     .row
-      = f.submit "park create", class: "btn btn-outline-primary"
+      .form-group.col-2.text-center
+        = f.label :park_image
+      .col-2
+        = f.file_field :park_image, id:"park_image"
+        #park-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
+      .form-group.col-12.text-center  
+        = f.submit "park create", class: "btn btn-outline-primary"

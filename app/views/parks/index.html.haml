@@ -11,10 +11,13 @@
           .card
             .card-body
               .row
-                %p= "#{park.name}"
-                %p= "(15分：#{park.unit_price}円)"
-              .row
-                %p= "#{park.street}"
+                .col-8
+                  .name= "#{park.name}"
+                  .price= "(15分：#{park.unit_price}円)"
+                  .street= "#{park.street}"
+                .col-4
+                  = image_tag park.park_image, height: "80x" if park.park_image.attached?
+
     .col-6
       #map
 :css

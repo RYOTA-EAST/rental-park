@@ -50,7 +50,6 @@ class ParksController < ApplicationController
       response = Net::HTTP.get_response(uri)
       result = JSON.parse(response.body)
       if result["results"]
-        @park.postal_code = result["results"][0]["zipcode"]
         @park.prefecture_code = result["results"][0]["prefcode"]
         @park.city = result["results"][0]["address2"]
         @park.street = result["results"][0]["address3"]
@@ -71,7 +70,7 @@ class ParksController < ApplicationController
   private
 
   def park_params
-    params.require(:park).permit(:name, :number, :postal_code, :prefecture_code, :city, :street, :explosive, :unit_price, :start_time, :end_time).merge(user_id: current_user.id)
+    params.require(:park).permit(:name, :number, :prefecture_code, :city, :street, :explosive, :unit_price, :start_time, :end_time,:park_image).merge(user_id: current_user.id)
   end
   
   def set_park_params

@@ -13,6 +13,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w( preview.js )
+Rails.application.config.assets.precompile += %w( preview_park.js )
 Rails.application.config.assets.precompile += %w( test.js )
 Rails.application.config.assets.precompile += %w( jquery.jpostal.js )
 Rails.application.config.assets.precompile += %w( address_autofill.js )
