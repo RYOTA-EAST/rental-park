@@ -64,9 +64,9 @@
             = f.text_field :postal_code, autofocus: true
         .row
           .field
-            = f.label :prefecture_code
+            = f.label :prefecture_id
             %br/
-            = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :name, :name, {}, {class:"prefecture-select"})
+            = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
           .field
             = f.label :city
             %br/

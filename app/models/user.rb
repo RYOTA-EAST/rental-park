@@ -8,6 +8,19 @@ class User < ApplicationRecord
   has_many :cars
   has_many :events
 
+  with_options presence: true do
+    validates :nickname
+    validates :last_name
+    validates :first_name
+    validates :last_name_kana
+    validates :first_name_kana
+    validates :postal_code
+    validates :prefecture_id
+    validates :city
+    validates :street
+    validates :phone_number
+  end
+
   include JpPrefecture
   jp_prefecture :prefecture_code
  
@@ -22,7 +35,7 @@ class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
 
-  validates :prefecture_code, numericality: { other_than: 1 }
+  validates :prefecture_id, numericality: { other_than: 1 }
 
 
 end
