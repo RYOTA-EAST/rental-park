@@ -8,10 +8,6 @@
   = form_with model: @park, local: true do |f|
     = render 'layouts/error_messages', model: f.object
     .row
-      .form-group.col-12
-        = f.label :郵便番号, class: "col-2 text-center"
-        = f.text_field :postal_code
-    .row
       .form-group.col-12    
         = f.label :都道府県, class: "col-2 text-center"
         = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {}, {class:"prefecture-select"})
