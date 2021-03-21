@@ -10,17 +10,27 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    validates :last_name
-    validates :first_name
-    validates :last_name_kana
-    validates :first_name_kana
-    validates :postal_code
+
+    with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: '全角文字を使用してください' } do
+      validates :first_name
+      validates :last_name
+    end
+  
+    with_options presence: true, format: { with: /\A[ァ-ヶ]+\z/, message: '全角カタカナを使用してください' } do
+      validates :first_name_kana
+      validates :last_name_kana
+    end
+
+    validates :postal_code, format: { with: /\A[0-9]{7}\z/, message: 'は半角数字を7文字入力してください' }
     validates :prefecture_id
     validates :city
     validates :street
-    validates :phone_number
+    validates :phone_number, format: { with: /\A\d{1,11}\z/, message: 'is up to 11 characters with numbers only' }
   end
 
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
+  
   include JpPrefecture
   jp_prefecture :prefecture_code
  
