@@ -13,9 +13,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    if @event.save!
+    if @event.save
       redirect_to events_path
     else
+      @park_find = Park.find(params[:park_id])
+      @events = Event.where(park_id:params[:park_id])
       render :new
     end
   end

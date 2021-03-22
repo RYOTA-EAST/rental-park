@@ -34,13 +34,13 @@
           = f.label :駐車車両, class: 'roster-label'
           = f.collection_select(:car_id, Car.where(user_id: current_user.id), :id, :vehicle_type)
         .form
-          = f.label :start_date
+          = f.label :開始日時
           = f.datetime_select :start_date, minute_step: 15
         .form
-          = f.label :end_date
+          = f.label :終了日時
           = f.datetime_select :end_date, minute_step: 15
         .form
-          = f.label :memo
+          = f.label :メモ（使用用途等）
           = f.text_field :memo
         = f.submit "rental create!", class: "btn btn-outline-primary"
   .row
