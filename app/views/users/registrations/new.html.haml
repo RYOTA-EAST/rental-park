@@ -7,72 +7,73 @@
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = render "users/shared/error_messages", resource: resource
     .row
-      .field.mb-1
+      .form-group.col-2.mb-1
         = f.label :nickname
         %br/
         = f.text_field :nickname, autofocus: true
-      .field
+      .field-group.col-2.mb-1
         = f.label :email
         %br/
         = f.email_field :email, autofocus: true, autocomplete: "email"
     .row
-      .field
+      .field-group.col-2.mb-1
         = f.label :password
         - if @minimum_password_length
           %em
             (#{@minimum_password_length} characters minimum)
         %br/
         = f.password_field :password, autocomplete: "new-password"
-      .field
+      .field-group.col-2.mb-1
         = f.label :password_confirmation
         %br/
         = f.password_field :password_confirmation, autocomplete: "new-password"
     .row
-      .field
+      .field-group.col-2.mb-1
         = f.label :last_name
         %br/
         = f.text_field :last_name, autofocus: true
-      .field
+      .field-group.col-2.mb-1
         = f.label :first_name
         %br/
         = f.text_field :first_name, autofocus: true
     .row
-      .field
+      .field-group.col-2.mb-1
         = f.label :last_name_kana
         %br/
         = f.text_field :last_name_kana, autofocus: true
-      .field
+      .field-group.col-2.mb-1
         = f.label :first_name_kana
         %br/
         = f.text_field :first_name_kana, autofocus: true
     .row
-      .field
+      .field-group.col-2.mb-1
         = f.label :postal_code
         %br/
         = f.text_field :postal_code, autofocus: true, id: "user_postal_code"
-      .field
-        = f.label :prefecture_code
+    .row
+      .field-group.col-2.mb-1
+        = f.label :prefecture_id
         %br/
-        = f.collection_select(:prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {}, {class:"prefecture-select", id: "user_prefecture_code"})
-      .field
+        = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select", id: "user_prefecture_code"})
+      .field-group.col-2.mb-1
         = f.label :city
         %br/
         = f.text_field :city, autofocus: true, id: "user_city"
-      .field
+      .field-group.col-2.mb-1
         = f.label :street
         %br/
         = f.text_field :street, autofocus: true, id: "user_street"
-      .field
+      .field-group.col-2.mb-1
         = f.label :explosive
         %br/
         = f.text_field :explosive, autofocus: true
     .row
-      .field
+      .field-group.col-12.mb-1
         = f.label :phone_number
         %br/
         = f.text_field :phone_number, autofocus: true
-    .row
+    .row.text-center
       .actions
         = f.submit "Sign up", class:["btn btn-primary", "btn-lg", "btn-block"]
-    .row
+    .row.text-center
       = render "users/shared/links"

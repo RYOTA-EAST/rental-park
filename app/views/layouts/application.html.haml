@@ -19,7 +19,8 @@
             = f.submit "search", class: "btn btn-light"
         .login-user
           - if user_signed_in?
-            = "USER名：#{current_user.nickname}"
+            = "USER名："
+            = link_to "#{current_user.nickname}", edit_user_registration_path(id: current_user.id)
             = link_to '駐車場一覧' , parks_path, method: :get ,class: ["logout","btn","btn-success"]
             = link_to 'レンタル一覧' , events_path, method: :get ,class: ["logout","btn","btn-success"]
             = link_to 'マイカー' , cars_path, method: :get ,class: ["logout","btn","btn-success"]
