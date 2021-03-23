@@ -13,9 +13,6 @@
           %td No
           %td= @park_find.number
         %tr 
-          %td 郵便番号
-          %td= @park_find.postal_code
-        %tr 
           %td 住所
           %td#address= @park_find.city + @park_find.street + @park_find.explosive
         %tr 
@@ -41,42 +38,11 @@
           = f.label :cancel_flag
           = f.check_box :cancel_flag
         = f.submit "rental create!", class: "btn btn-outline-primary"
-      .row
-        .simple-calendar
-          .calendar-heading
-            %span= "3月"
-            %table.table-striped
-              %thead 
-                %th= "時間"
-              %tbody 
-                %tr 
-                  %td
-                    = "日付"
-                    - (0..23).each do |hh|
-                      -0.step(45,15) do |mm|
-                        - if mm == 0
-                          .time= "#{hh}:00"
-                        - else
-                          .time= "#{hh}:#{mm}"
-        = week_calendar do |date|
-          = date.day
-          - if @park_find.start_time < date + 1 && @park_find.end_time >= date
-            - out = "○" 
-          - else
-            - out = "×"
-          - (0..23).each do |h|
-            -0.step(45,15) do |m|
-              - if @park_find.start_time.day == date.day
-                - if !(@park_find.start_time.hour <= h)
-                  - out = "×"
-                - elsif(@park_find.start_time.min <= m)
-                  -out = "○"
-              - if @park_find.end_time.day == date.day
-                - if (@park_find.end_time.hour <= h) && (@park_find.end_time.min <= m)
-                  -out = "×"
-              - if m == 0
-                .time{class: "#{h}:00"}
-                  = out
-              - else
-                .time{class: "#{h}:#{m}"}
-                = out
+  .row
+    .simple-calendar
+      .calendar-heading
+        = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
+          = date
+          - event.each do |event|
+            %div
+              = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")

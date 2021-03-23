@@ -1,6 +1,7 @@
 class ParksController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update, :destroy]
   before_action :set_park_params, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_top, only: [:edit, :update, :destroy]
   
   def index
     @park_all = Park.where(user_id: current_user.id)
@@ -64,7 +65,11 @@ class ParksController < ApplicationController
 
   def search
     @search = params[:search_word]
-    gon.parks = Park.where.not(user_id: current_user.id)
+    if user_signed_in?
+      gon.parks = Park.where.not(user_id: current_user.id)
+    else
+      gon.parks = Park.all
+    end
   end
 
   private
@@ -75,6 +80,10 @@ class ParksController < ApplicationController
   
   def set_park_params
     @park_find = Park.find(params[:id])
+  end
+
+  def move_to_top
+    redirect_to top_page_parks_path unless current_user == @park_find.user
   end
 
 end

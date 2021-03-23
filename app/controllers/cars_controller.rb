@@ -1,6 +1,7 @@
 class CarsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_car_params, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_top, only: [:show, :edit, :update, :destroy]
   def index
     @car = Car.where(user_id: current_user.id)
   end
@@ -18,8 +19,10 @@ class CarsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
-    
   end
 
   def update
@@ -45,5 +48,9 @@ class CarsController < ApplicationController
 
   def set_car_params
     @car = Car.find(params[:id])
+  end
+
+  def move_to_top
+    redirect_to top_page_parks_path unless current_user == @car.user
   end
 end
