@@ -9,10 +9,11 @@
           .card
             = image_tag car.vehicle_image, width: "100%", height: "200" if car.vehicle_image.attached?
             .card-body
+              - if car.use_stop == true
+                .alert.alert-warning
+                  = "利用停止"
               .row
                 %p= "#{car.vehicle_type}"
-                - if car.use_stop == true
-                  %p (利用停止)
               .row
                 %p= "#{car.city}"           
                 %p= "#{car.class_number}"

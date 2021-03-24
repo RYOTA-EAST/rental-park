@@ -4,7 +4,9 @@
       %h5 詳細ページ
     .col 
       =link_to '編集', edit_car_path(params[:id]), class: "btn btn-primary"
-      =link_to '削除', car_path(params[:id]), method: :delete, class: "btn btn-danger"
+      - if @car.use_stop == true
+        .alert.alert-warning.text-center
+          = "利用停止"
 
   .row
     .col
