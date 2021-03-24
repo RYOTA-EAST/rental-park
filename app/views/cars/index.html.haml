@@ -11,6 +11,8 @@
             .card-body
               .row
                 %p= "#{car.vehicle_type}"
+                - if car.use_stop == true
+                  %p (利用停止)
               .row
                 %p= "#{car.city}"           
                 %p= "#{car.class_number}"

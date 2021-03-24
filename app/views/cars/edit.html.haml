@@ -30,5 +30,8 @@
       .form-group.col-2.mb-1
         = f.label :ナンバー
         = f.text_field :designated_number
+      .form
+        = f.label :use_stop
+        = f.check_box :use_stop
     .row
       = f.submit "アップデート", class: "btn btn-outline-primary"
