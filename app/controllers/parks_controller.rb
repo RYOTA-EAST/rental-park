@@ -66,7 +66,7 @@ class ParksController < ApplicationController
   def search
     @search = params[:search_word]
     if user_signed_in?
-      gon.parks = Park.where.not(user_id: current_user.id)
+      gon.parks = Park.where.not(user_id: current_user.id).where(rending_stop: false).where('end_time > ?',Time.now)
     else
       gon.parks = Park.all
     end
@@ -75,7 +75,7 @@ class ParksController < ApplicationController
   private
 
   def park_params
-    params.require(:park).permit(:name, :number, :prefecture_id, :city, :street, :explosive, :unit_price, :start_time, :end_time,:park_image).merge(user_id: current_user.id)
+    params.require(:park).permit(:name, :prefecture_id, :city, :street, :explosive, :unit_price, :start_time, :end_time, :park_image, :rending_stop).merge(user_id: current_user.id)
   end
   
   def set_park_params

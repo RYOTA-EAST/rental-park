@@ -7,8 +7,14 @@
         - if (current_user.id == @park_find.user.id)
           = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
           = link_to '削除', park_path(params[:id]), method: :delete, class: "btn btn-danger"
-        - else
+        - if @park_find.end_time < Time.now
+          .alert.alert-danger.text-center
+            = "貸出期間終了"
+        - elsif @park_find.rending_stop == false
           = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
+        - else
+          .alert.alert-warning.text-center
+            = "貸出停止"
   .row
     .col
       %table.table.text-center
@@ -18,9 +24,6 @@
         %tr 
           %td 名前
           %td= @park_find.name
-        %tr 
-          %td No
-          %td= @park_find.number
         %tr 
           %td 住所
           %td#address= @park_find.prefecture.name + @park_find.city + @park_find.street + @park_find.explosive

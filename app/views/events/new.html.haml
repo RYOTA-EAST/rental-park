@@ -10,9 +10,6 @@
           %td 名前
           %td= @park_find.name
         %tr 
-          %td No
-          %td= @park_find.number
-        %tr 
           %td 住所
           %td#address= @park_find.city + @park_find.street + @park_find.explosive
         %tr 
@@ -32,7 +29,7 @@
         = render 'layouts/error_messages', model: f.object
         .form
           = f.label :駐車車両, class: 'roster-label'
-          = f.collection_select(:car_id, Car.where(user_id: current_user.id), :id, :vehicle_type)
+          = f.collection_select(:car_id, Car.where(user_id: current_user.id).where(use_stop: false), :id, :vehicle_type)
         .form
           = f.label :開始日時
           = f.datetime_select :start_date, minute_step: 15
