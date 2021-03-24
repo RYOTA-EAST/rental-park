@@ -8,8 +8,12 @@ class EventsController < ApplicationController
 
   def new
     @park_find = Park.find(params[:park_id])
-    @event = Event.new
-    @events = Event.where(park_id:params[:park_id])
+    if @park_find.rending_stop == false 
+      @event = Event.new
+      @events = Event.where(park_id:params[:park_id])
+    else
+      redirect_to park_path(params[:park_id])
+    end
   end
 
   def create

@@ -39,5 +39,8 @@
       .col-2
         = f.file_field :park_image, id:"park_image"
         #park-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
-      .form-group.col-12.text-center  
+    .row
+      .form-group.col.text-center
+        = f.label :rending_stop
+        = f.check_box :rending_stop
         = f.submit "park create", class: "btn btn-outline-primary"
