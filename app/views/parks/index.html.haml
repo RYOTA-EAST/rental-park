@@ -12,6 +12,12 @@
             .card-body
               .row
                 .col-8
+                  - if park.end_time < Time.now
+                    .alert.alert-danger.text-center
+                      = "貸出期間終了"
+                  - elsif park.rending_stop == true
+                    .alert.alert-warning.text-center
+                      = "貸出停止"
                   .name= "#{park.name}"
                   .price= "(15分：#{park.unit_price}円)"
                   .street= "#{park.street}"
