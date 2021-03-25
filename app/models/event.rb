@@ -25,5 +25,4 @@ class Event < ApplicationRecord
   def end_date_within_period
     errors.add(:end_dete, "は期間内を選択してください") if self.end_date < park.start_time || self.end_date > park.end_time
   end
-  # binding.pry
 end
