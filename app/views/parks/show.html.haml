@@ -17,7 +17,7 @@
         .alert.alert-warning.text-center
           = "貸出停止"
   .row
-    .col
+    .col-4
       %table.table.text-center
         %tr 
           %th 項目
@@ -40,17 +40,37 @@
               = "〜"
             .end_time
               = "#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
-    .col
+    .col-4
       %h5 Park Image
-      = image_tag @park_find.park_image, height: "300" if @park_find.park_image.attached?
+      = image_tag @park_find.park_image, width: "300" if @park_find.park_image.attached?
+    .col-4
+      .map
+        #display 何かが表示される、、、、！
+        #map
+  .row
+    .simple-calendar
+      .calendar-heading
+        = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
+          = date
+          - event.each do |event|
+            - if current_user == event.user
+              .alert.alert-success
+                =link_to "#{event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")}", park_event_path(park_id:event.park.id,id: event.id)
+            - else
+              .alert.alert-light
+                = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
+                - if current_user == @park_find.user
+                  = link_to event.car.designated_number, car_path(event.car_id)
+    %p 凡例
+    .alert.alert-success
+      = "ログインユーザー"
+    .alert.alert-light
+      = "その他ユーザー(車両ナンバー)"
 
-  .map.text-center
-    #display 何かが表示される、、、、！
-    #map
 :css
   #map {
     height: 300px;
-    width: 1100px;
+    width: 400px;
     display: flex;
     justify-content: center;
   }
