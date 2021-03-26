@@ -13,8 +13,6 @@ class DuplicateValidator < ActiveModel::EachValidator
       not_own_periods = Event.where(park_id: record.park_id).where('start_date < ? AND end_date > ?', new_end_date, new_start_date)
     end
 
-    binding.pry
-
     record.errors.add(attribute, 'に重複があります') if not_own_periods.present?
   end
 end

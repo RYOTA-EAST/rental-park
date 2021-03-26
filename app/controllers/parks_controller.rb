@@ -22,6 +22,7 @@ class ParksController < ApplicationController
   end
 
   def show
+    @events = Event.where(park_id: params[:id]).where(cancel_flag: false)
   end
   
   def edit
