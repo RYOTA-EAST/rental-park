@@ -78,3 +78,8 @@ gem 'simple_calendar'
 
 gem 'mini_magick' #画像を保存する
 gem 'image_processing'
+
+gem 'rails-i18n'
+
+gem 'devise-i18n'
+gem 'devise-i18n-views'

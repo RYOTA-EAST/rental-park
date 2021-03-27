@@ -1,0 +1,26 @@
+ja:
+ activerecord:
+   attributes:
+     user:
+       nickname: ニックネーム
+       first_name: 苗字
+       last_name: 名前
+       first_name_kana: 苗字(全角カナ)
+       last_name_kana: 名前(全角カナ)
+       postal_code: 郵便番号
+       prefecture_id: 都道府県
+       city: 市町村
+       street: 番地
+       phone_number: 電話番号
+     car:
+       number_image: ナンバー画像
+       vehicle_image: 車両画像
+       vehicle_type: 車種
+       city: 地域
+       class_number: 分類番号
+       registration_type: 登録種別
+       designated_number: ナンバー
+     event:
+       memo: メモ
+       start_date: 開始日時
+       end_date: 終了日時

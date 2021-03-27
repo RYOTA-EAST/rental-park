@@ -17,7 +17,7 @@ class Event < ApplicationRecord
     errors.add(:end_date, "は開始時刻より遅い時間を選択してください") if self.start_date >= self.end_date
   end
   def start_check
-    errors.add(:start_dete, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.now
+    errors.add(:start_date, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.now
   end
   def start_date_within_period
     errors.add(:start_dete, "は期間内を選択してください") if self.start_date < park.start_time || self.start_date > park.end_time
