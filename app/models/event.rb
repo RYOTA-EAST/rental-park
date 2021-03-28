@@ -20,9 +20,9 @@ class Event < ApplicationRecord
     errors.add(:start_date, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.now
   end
   def start_date_within_period
-    errors.add(:start_dete, "は期間内を選択してください") if self.start_date < park.start_time || self.start_date > park.end_time
+    errors.add(:start_date, "は期間内を選択してください") if self.start_date < park.start_time || self.start_date > park.end_time
   end
   def end_date_within_period
-    errors.add(:end_dete, "は期間内を選択してください") if self.end_date < park.start_time || self.end_date > park.end_time
+    errors.add(:end_date, "は期間内を選択してください") if self.end_date < park.start_time || self.end_date > park.end_time
   end
 end

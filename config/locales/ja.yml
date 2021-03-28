@@ -12,6 +12,15 @@ ja:
        city: 市町村
        street: 番地
        phone_number: 電話番号
+     park:
+       name: 名前
+       prefecture_id: 都道府県
+       city: 市町村
+       street: 番地
+       unit_price: 単価
+       start_time: 開始日時
+       end_time: 終了日時
+       park_image: 駐車場画像
      car:
        number_image: ナンバー画像
        vehicle_image: 車両画像
