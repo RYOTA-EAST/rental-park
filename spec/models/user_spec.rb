@@ -5,7 +5,6 @@ RSpec.describe User, type: :model do
     @user = build(:user)
   end
 
-  # binding.pry
   context '登録できる' do
     it '全て揃っていれば登録できる' do
       expect(@user).to be_valid
