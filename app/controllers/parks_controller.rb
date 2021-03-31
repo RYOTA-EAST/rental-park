@@ -14,6 +14,7 @@ class ParksController < ApplicationController
 
   def create
     @park = Park.new(park_params)
+    @park.rending_stop = false
     if @park.save
       redirect_to root_path
     else

@@ -3,15 +3,24 @@ ja:
    attributes:
      user:
        nickname: ニックネーム
-       first_name: 苗字
-       last_name: 名前
-       first_name_kana: 苗字(全角カナ)
-       last_name_kana: 名前(全角カナ)
+       first_name: 名前
+       last_name: 苗字
+       first_name_kana: 名前(全角カナ)
+       last_name_kana: 苗字(全角カナ)
        postal_code: 郵便番号
        prefecture_id: 都道府県
        city: 市町村
        street: 番地
        phone_number: 電話番号
+     park:
+       name: 名前
+       prefecture_id: 都道府県
+       city: 市町村
+       street: 番地
+       unit_price: 単価
+       start_time: 開始日時
+       end_time: 終了日時
+       park_image: 駐車場画像
      car:
        number_image: ナンバー画像
        vehicle_image: 車両画像
