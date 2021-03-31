@@ -8,17 +8,24 @@ class Park < ApplicationRecord
     validates :city
     validates :street
     validates :name
-    validates :unit_price
+    validates :unit_price, numericality: {only_integer: true, message: 'は半角数字を入力してください'}
+    validates :start_time
+    validates :end_time
+    validates :park_image
   end
 
   validate :start_end_check
   validate :start_check
 
   def start_end_check
-    errors.add(:end_time, "は開始時刻より遅い時間を選択してください") if self.start_time >= self.end_time
+    unless start_time == nil || end_time == nil
+      errors.add(:end_time, "は開始時刻より遅い時間を選択してください") if self.start_time >= self.end_time
+    end
   end
   def start_check
-    errors.add(:start_time, "は現在の日時より遅い時間を選択してください") if self.start_time < Time.now
+    unless start_time == nil
+      errors.add(:start_time, "は現在の日時より遅い時間を選択してください") if self.start_time < Time.now
+    end
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
