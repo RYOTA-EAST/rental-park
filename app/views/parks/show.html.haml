@@ -8,7 +8,12 @@
         - unless @park_find.rending_stop == true || @park_find.end_time < Time.now
           = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
       - else
-        = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
+        - if Car.exists?(user_id: current_user.id)
+          = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
+        - else
+          = link_to new_car_path, class:["btn","btn-primary"] do
+            %div 車両登録で
+            %div レンタル可能
 
       - if @park_find.end_time < Time.now
         .alert.alert-danger.text-center
