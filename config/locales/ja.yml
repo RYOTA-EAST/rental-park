@@ -29,6 +29,7 @@ ja:
        class_number: 分類番号
        registration_type: 登録種別
        designated_number: ナンバー
+       use_stop: 利用停止
      event:
        memo: メモ
        start_date: 開始日時
