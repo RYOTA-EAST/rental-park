@@ -43,6 +43,7 @@
   function initMap(){
       // geocoderを初期化
       geocoder = new google.maps.Geocoder()
+      var bounds = new google.maps.LatLngBounds();
       // mapの初期位置設定
       map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -35.6809591, lng: 139.7673068},
@@ -63,6 +64,7 @@
                   map: map,
                   position: results[0].geometry.location
               });
+              bounds.extend (marker[i].position);
               // 変数iを変数idに代入
               let id = parks[i]['id']
               // infoWindowは吹き出し
@@ -79,13 +81,9 @@
           } else {
               alert('Geocode was not successful for the following reason: ' + status);
           }
+          map.fitBounds(bounds);
           });
       }
   }
   
-  function codeAddress(){
-      // 入力を取得
-      let inputAddress = document.getElementById('address').value;
-      // geocodingしたあとmapを移動
-  }
 %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&libraries=places&callback=initMap"}
