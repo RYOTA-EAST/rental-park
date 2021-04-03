@@ -3,17 +3,24 @@
     .col-10
       %h5 詳細ページ
     .col 
-      - if (current_user.id == @park_find.user.id)
-        = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
-        - unless @park_find.rending_stop == true || @park_find.end_time < Time.now
-          = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
-      - else
-        - if Car.exists?(user_id: current_user.id)
-          = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
+      - if user_signed_in?
+        - if (current_user.id == @park_find.user.id)
+          = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
+          - unless @park_find.rending_stop == true || @park_find.end_time < Time.now
+            = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
         - else
-          = link_to new_car_path, class:["btn","btn-primary"] do
-            %div 車両登録で
-            %div レンタル可能
+          - if Car.exists?(user_id: current_user.id)
+            = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
+          - else
+            = link_to new_car_path, class:["btn","btn-primary"] do
+              %div 車両登録で
+              %div レンタル
+      - else
+        = link_to new_park_event_path(params[:id]), class:["btn","btn-primary"] do
+          %div ログインと
+          %div 車両登録で
+          %div レンタル
+      
 
       - if @park_find.end_time < Time.now
         .alert.alert-danger.text-center
