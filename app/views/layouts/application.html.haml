@@ -15,7 +15,7 @@
           %h1= link_to 'レンタパーク', root_path, class: "text-white"
         .form
           = form_with url: search_parks_path, method: :get, local: true do |f|
-            = f.text_field :search_word
+            = f.search_field :search_word
             = f.submit "search", class: "btn btn-light", name: "search-commit"
         .login-user
           - if user_signed_in?

@@ -1,5 +1,8 @@
 .container
-  %h1 借用登録
+  - if current_user == @park_find.user
+    %h1 借用停止登録
+  - else
+    %h1 借用登録
   .row
     .col
       %table.table.text-center

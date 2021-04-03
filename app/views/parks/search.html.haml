@@ -1,7 +1,31 @@
 .container
-  %h1 serach 
-
-  #map
+  %h1 検索
+  %p="検索場所：#{@search}" 
+  .row 
+    .col-6
+      - @parks.each do |park|
+        = link_to park_path(park.id) do
+          .card
+            .card-body
+              .row
+                .col-8
+                  - if park.end_time < Time.now
+                    .alert.alert-danger.text-center
+                      = "貸出期間終了"
+                  - elsif park.rending_stop == true
+                    .alert.alert-warning.text-center
+                      = "貸出停止"
+                  .row 
+                    .name= "#{park.name}"
+                  .row 
+                    .distans= "約#{(park.distance_from(@search_geo) * 1000).round(-1)}m"
+                    .price= "(#{park.unit_price}円/15分)"
+                  .row 
+                    .street= "#{park.street}"
+                .col-4
+                  = image_tag park.park_image, height: "80x" if park.park_image.attached?
+    .col-6
+      #map
 :css
   #map {
     height: 700px;
@@ -49,23 +73,24 @@
               });
               // markerがクリックされた時、
               marker[i].addListener("click", function(){
-                  // infoWindowを表示
-                  infoWindow[i].open(map, marker[i]);
+                // infoWindowを表示
+                infoWindow[i].open(map, marker[i]);
               });
           } else {
               alert('Geocode was not successful for the following reason: ' + status);
           }
           });
       }
-  
-    let inputAddress = "#{@search}";
-    
-    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-      if (status == 'OK'){
-        map.setCenter(results[0].geometry.location);
-      } else {
-        alert('該当する結果がありませんでした：' + status);
-      }
-    });
+    setTimeout(()=>{
+      let inputAddress = "#{@search}";
+      geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+        if (status == 'OK'){
+          map.setCenter(results[0].geometry.location);
+        } else {
+          alert('該当する結果がありませんでした：' + status);
+        }
+      });
+    }, 500);
   };
+
 %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&libraries=places&callback=initMap"}
