@@ -66,10 +66,13 @@ class ParksController < ApplicationController
 
   def search
     @search = params[:search_word]
+    @search_geo = Geocoder.coordinates(@search)
     if user_signed_in?
-      gon.parks = Park.where.not(user_id: current_user.id).where(rending_stop: false).where('end_time > ?',Time.now).near(@search, 0.4)
+      @parks = Park.where.not(user_id: current_user.id).where(rending_stop: false).where('end_time > ?',Time.now).near(@search, 0.4)
+      gon.parks = @parks 
     else
-      gon.parks = Park.all.near(@search, 0.4)
+      @parks = Park.all.near(@search, 0.4)
+      gon.parks = @parks 
     end
   end
 
