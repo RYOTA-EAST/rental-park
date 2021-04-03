@@ -49,23 +49,24 @@
               });
               // markerがクリックされた時、
               marker[i].addListener("click", function(){
-                  // infoWindowを表示
-                  infoWindow[i].open(map, marker[i]);
+                // infoWindowを表示
+                infoWindow[i].open(map, marker[i]);
               });
           } else {
               alert('Geocode was not successful for the following reason: ' + status);
           }
           });
       }
-  
-    let inputAddress = "#{@search}";
-    
-    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-      if (status == 'OK'){
-        map.setCenter(results[0].geometry.location);
-      } else {
-        alert('該当する結果がありませんでした：' + status);
-      }
-    });
+    setTimeout(()=>{
+      let inputAddress = "#{@search}";
+      geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+        if (status == 'OK'){
+          map.setCenter(results[0].geometry.location);
+        } else {
+          alert('該当する結果がありませんでした：' + status);
+        }
+      });
+    }, 500);
   };
+
 %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&libraries=places&callback=initMap"}
