@@ -62,15 +62,14 @@ class ParksController < ApplicationController
   end
 
   def top_page
-    
   end
 
   def search
     @search = params[:search_word]
     if user_signed_in?
-      gon.parks = Park.where.not(user_id: current_user.id).where(rending_stop: false).where('end_time > ?',Time.now)
+      gon.parks = Park.where.not(user_id: current_user.id).where(rending_stop: false).where('end_time > ?',Time.now).near(@search, 0.4)
     else
-      gon.parks = Park.all
+      gon.parks = Park.all.near(@search, 0.4)
     end
   end
 
