@@ -90,3 +90,5 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 
 gem 'rounding'
+
+gem "aws-sdk-s3", require: false
