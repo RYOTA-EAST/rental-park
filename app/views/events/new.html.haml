@@ -31,16 +31,16 @@
       = form_with model: [@park_find, @event], local: true do |f|
         = render 'layouts/error_messages', model: f.object
         .form
-          = f.label :駐車車両, class: 'roster-label'
+          = f.label :car_id, class: 'roster-label'
           = f.collection_select(:car_id, Car.where(user_id: current_user.id).where(use_stop: false), :id, :vehicle_type)
         .form
-          = f.label :開始日時
+          = f.label :start_date
           = f.datetime_select :start_date, minute_step: 15
         .form
-          = f.label :終了日時
+          = f.label :end_date
           = f.datetime_select :end_date, minute_step: 15
         .form
-          = f.label :メモ（使用用途等）
+          = f.label :memo
           = f.text_field :memo
         = f.submit "rental create!", class: "btn btn-outline-primary"
   .row

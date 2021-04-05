@@ -17,6 +17,7 @@ ja:
        prefecture_id: 都道府県
        city: 市町村
        street: 番地
+       explosive: その他
        unit_price: 単価
        start_time: 開始日時
        end_time: 終了日時
@@ -31,6 +32,7 @@ ja:
        designated_number: ナンバー
        use_stop: 利用停止
      event:
+       car_id: 車両
        memo: メモ
        start_date: 開始日時
        end_date: 終了日時
