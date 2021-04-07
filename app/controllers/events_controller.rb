@@ -8,11 +8,11 @@ class EventsController < ApplicationController
 
   def new
     @park_find = Park.find(params[:park_id])
-    if @park_find.rending_stop == false 
+    if @park_find.rending_stop == true || Car.where(user_id:current_user.id).empty?
+      redirect_to park_path(params[:park_id])
+    else
       @event = Event.new
       @events = Event.where(park_id: params[:park_id], cancel_flag: false)
-    else
-      redirect_to park_path(params[:park_id])
     end
   end
 
