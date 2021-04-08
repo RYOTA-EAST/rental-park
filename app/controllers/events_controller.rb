@@ -19,7 +19,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to events_path
+      if current_user == @event.park.user
+        redirect_to "/parks/#{@event.park.id}?start_date=#{@event.start_date.strftime("%Y-%m-%d")}"
+      else
+        redirect_to events_path
+      end
     else
       @park_find = Park.find(params[:park_id])
       @events = Event.where(park_id: params[:park_id], cancel_flag: false)
