@@ -1,6 +1,7 @@
 = javascript_include_tag "preview_park"
 
 .container
+  %h2.mb-3 駐車場新規登録
   = form_with url: postal_change_parks_path, method: :get, local: true do |f|
     .row
       .form-group.col-12
@@ -45,4 +46,4 @@
         = f.file_field :park_image, id:"park_image"
         #park-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
       .form-group.col-12.text-center  
-        = f.submit "park create", class: "btn btn-outline-primary"
+        = f.submit "新規登録", class: "btn btn-outline-primary"

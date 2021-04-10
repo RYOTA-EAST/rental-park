@@ -12,11 +12,14 @@
     .container.sticky-top
       .d-flex.justify-content-between
         .row
-          %h1= link_to 'レンタパーク', root_path, class: "text-white"
+          = link_to root_path, class: "text-white" do
+            .row
+              %h1 Renta
+              = image_tag 'park.png' ,height: '50px'
         .form
           = form_with url: search_parks_path, method: :get, local: true do |f|
             = f.search_field :search_word
-            = f.submit "search", class: "btn btn-light", name: "search-commit"
+            = f.submit "検索", class: "btn btn-light", name: "search-commit"
         .login-user
           - if user_signed_in?
             = "USER名："
@@ -28,7 +31,8 @@
           - else
             = link_to 'ログイン', new_user_session_path, role: "button", class: ["login","btn","btn-primary"]
             = link_to '新規登録', new_user_registration_path, role: "button", class: ["sign-up","btn","btn-success"],data: {"turbolinks"=>false}
-  %body
-    = yield
+  .mb-5
+    %body
+      = yield
   %footer.fixed-bottom.text-center.bg-info.text-white
     %p COPYRIGHT &copy ryo-east 2021 All rights Reserved.

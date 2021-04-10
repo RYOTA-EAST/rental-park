@@ -1,7 +1,7 @@
 .container 
   .row 
     .col-10
-      %h5 詳細ページ
+      %h2.mb-3 マイカー詳細ページ
     .col 
       =link_to '編集', edit_car_path(params[:id]), class: "btn btn-primary" if current_user == @car.user
       - if @car.use_stop == true
@@ -10,10 +10,10 @@
 
   .row
     .col
-      %h5 Vehicle Image
+      %h5 車両画像
       = image_tag @car.vehicle_image, height: "300" if @car.vehicle_image.attached?
     .col
-      %h5 Number Image
+      %h5 ナンバー画像
       = image_tag @car.number_image, height: "300" if @car.vehicle_image.attached?
   
   .row

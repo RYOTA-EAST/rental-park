@@ -1,6 +1,7 @@
 = javascript_include_tag "preview_park"
 
 .container
+  %h2.mb-3 駐車場更新
   = form_with model: @park_find, local: true do |f|
     = render 'layouts/error_messages', model: f.object
     .row
@@ -43,4 +44,4 @@
       .form-group.col.text-center
         = f.label :rending_stop
         = f.check_box :rending_stop
-        = f.submit "park create", class: "btn btn-outline-primary"
+        = f.submit "更新", class: "btn btn-outline-primary"
