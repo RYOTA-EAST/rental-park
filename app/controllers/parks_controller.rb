@@ -16,7 +16,7 @@ class ParksController < ApplicationController
     @park = Park.new(park_params)
     @park.rending_stop = false
     if @park.save
-      redirect_to root_path
+      redirect_to park_path(@park.id)
     else
       render :new
     end

@@ -1,6 +1,6 @@
 .container 
   .row
-    %h1 マイカー一覧
+    %h2.mb-3 マイカー一覧
     = link_to '新規登録', new_car_path, class:["btn","btn-primary"]
   .row
     - @car.each do |car|

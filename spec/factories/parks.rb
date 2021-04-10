@@ -4,10 +4,11 @@ FactoryBot.define do
     address = Gimei.unique.address
     city { address.city.kanji }
     street { address.town.kanji }
+    explosive { "XYZビル" }
     name { 'ABC駐車場' }
     unit_price { Faker::Number.between(from: 50, to: 500) }
-    start_time { Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2) }
-    end_time { Faker::Time.between(from: DateTime.now + 3, to: DateTime.now + 10) }
+    start_time { Faker::Time.between(from: DateTime.now + 1.hour, to: DateTime.now + 3.hour).ceil_to(15.minutes) }
+    end_time { Faker::Time.between(from: start_time + 4.hour, to: DateTime.now + 10).ceil_to(15.minutes) }
     rending_stop { false }
 
     association :user

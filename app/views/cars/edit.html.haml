@@ -1,37 +1,37 @@
 = javascript_include_tag "preview"
 .container
-  %h1 編集
+  %h2.mb-3 マイカー編集
   = form_with model: @car, local: true do |f|
     = render 'layouts/error_messages', model: f.object
     .row
       .form-group.col-4.mb-1
-        = f.label :ナンバープレート画像
-        = f.file_field :number_image, id:"number_image"
-        #number-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
-      .form-group.col-4.mb-1
-        = f.label :車両全体画像
+        = f.label :vehicle_image
         = f.file_field :vehicle_image, id:"vehicle_image"
         #vehicle-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
+      .form-group.col-4.mb-1
+        = f.label :number_image
+        = f.file_field :number_image, id:"number_image"
+        #number-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
     .row
       .form-group.col-2.mb-1
-        = f.label :車種
+        = f.label :vehicle_type
         = f.text_field :vehicle_type
     .row
       .form-group.col-2.mb-1
-        = f.label :市町村
+        = f.label :city
         = f.text_field :city
       .form-group.col-2.mb-1
-        = f.label :分類番号
+        = f.label :class_number
         = f.text_field :class_number
     .row
       .form-group.col-2.mb-1
-        = f.label :登録分類
+        = f.label :registration_type
         = f.text_field :registration_type
       .form-group.col-2.mb-1
-        = f.label :ナンバー
+        = f.label :designated_number
         = f.text_field :designated_number
       .form
         = f.label :use_stop
         = f.check_box :use_stop
     .row
-      = f.submit "アップデート", class: "btn btn-outline-primary"
+      = f.submit "更新", class: "btn btn-outline-primary"
