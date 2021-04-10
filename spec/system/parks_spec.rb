@@ -159,7 +159,7 @@ RSpec.describe '駐車場詳細表示', type: :system do
       expect(page).to have_content(@park1.name)
       # 「編集」ボタンがないことを確認する
       expect(page).to have_no_link '編集', href: edit_park_path(@park1)
-      # 「レンタル」ボタンがないことを確認する
+      # 「レンタル」ボタンがあることを確認する
       expect(page).to have_link 'レンタル', href: new_park_event_path(@park1)
     end
     it 'ログインしていない場合は「ログインと車両登録でレンタル」を表示' do
