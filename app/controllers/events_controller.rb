@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :set_event_params, only: [:show, :edit, :update, :cancel]
   before_action :move_to_top, only: [:show, :edit, :update, :destroy]
   def index
-    @event = Event.where(user_id: current_user.id).where.not(park_id: current_user.parks.ids).includes(:park, :car).order(start_date: "DESC")
+    @event = Event.where(user_id: current_user.id).where.not(park_id: current_user.parks.ids).includes(:park, :car, :user).order(start_date: "DESC")
   end
 
   def new
@@ -36,27 +36,32 @@ class EventsController < ApplicationController
   
   def edit
     @park_find = Park.find(params[:park_id])
-    @events = Event.where(park_id:params[:park_id])
+    @events = Event.where(park_id:params[:park_id], cancel_flag: false).includes(:user)
   end
   
   def update
     if @event.update(event_params)
-    redirect_to park_event_path(park_id: params[:park_id], id: params[:id])
+      if @event.cancel_flag == true
+        redirect_to park_path(params[:park_id])
+      else
+        redirect_to park_event_path(park_id: params[:park_id], id: params[:id])
+      end
     else
       @park_find = Park.find(params[:park_id])
-      @events = Event.where(park_id:params[:park_id])
+      @events = Event.where(park_id:params[:park_id], cancel_flag: false).includes(:user)
       render :edit
     end
   end
   
-  def cancel
-    @event.cancel_flag = TRUE
-    if @event.update(event_params_cancel)
-      redirect_to events_path
-    else
-      render :index
-    end
-  end
+  # def cancel
+  #   @event.cancel_flag = TRUE
+  #   if @event.update(event_params_cancel)
+  #     @event = Event.where(park_id:params[:park_id])
+  #     redirect_to park_path(params[:id])
+  #   else
+  #     render :index
+  #   end
+  # end
 
 
   private

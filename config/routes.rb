@@ -14,10 +14,10 @@ Rails.application.routes.draw do
       get :search
     end
     resources :events, except: :index do
-      member do
-        put :cancel
-        patch :cancel
-      end
+      # member do
+      #   put :cancel
+      #   patch :cancel
+      # end
     end
     collection do
       get :postal_change

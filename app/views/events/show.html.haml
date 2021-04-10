@@ -3,9 +3,8 @@
     .col-10
       %h5 詳細ページ
     .col 
-      - if @event.start_date.to_date >= Date.today + 3
-        =link_to '編集', edit_park_event_path(park_id:params[:park_id], id: params[:id]), class: "btn btn-primary"
-      =link_to 'キャンセル', cancel_park_event_path(park_id:params[:park_id], id: params[:id]),method: :patch ,class: "btn btn-danger"
+      =link_to '編集', edit_park_event_path(park_id:params[:park_id], id: params[:id]), class: "btn btn-primary"
+      -# =link_to 'キャンセル', cancel_park_event_path(park_id:params[:park_id], id: params[:id]),method: :patch ,class: "btn btn-danger"
 
 .container 
   .row

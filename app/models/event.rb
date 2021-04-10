@@ -12,25 +12,33 @@ class Event < ApplicationRecord
   validate :start_check
   validate :start_date_within_period
   validate :end_date_within_period
-
+  
   def start_end_check
-    unless self.start_date == nil || self.end_date == nil
-      errors.add(:end_date, "は開始時刻より遅い時間を選択してください") if self.start_date >= self.end_date
+    if self.id.nil?
+      unless self.start_date == nil || self.end_date == nil
+        errors.add(:end_date, "は開始時刻より遅い時間を選択してください") if self.start_date >= self.end_date
+      end
     end
   end
-  def start_check
-    unless self.start_date == nil
-      errors.add(:start_date, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.now
+    def start_check
+    if self.id.nil?
+      unless self.start_date == nil
+        errors.add(:start_date, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.now
+      end
     end
   end
   def start_date_within_period
-    unless self.start_date == nil || self.end_date == nil
-      errors.add(:start_date, "は期間内を選択してください") if self.start_date < park.start_time || self.start_date > park.end_time
+    if self.id.nil?
+      unless self.start_date == nil || self.end_date == nil
+        errors.add(:start_date, "は期間内を選択してください") if self.start_date < park.start_time || self.start_date > park.end_time
+      end
     end
   end
   def end_date_within_period
-    unless self.start_date == nil || self.end_date == nil
-      errors.add(:end_date, "は期間内を選択してください") if self.end_date < park.start_time || self.end_date > park.end_time
+    if self.id.nil?
+      unless self.start_date == nil || self.end_date == nil
+        errors.add(:end_date, "は期間内を選択してください") if self.end_date < park.start_time || self.end_date > park.end_time
+      end
     end
   end
 end

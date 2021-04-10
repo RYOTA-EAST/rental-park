@@ -24,22 +24,28 @@
           = f.collection_select(:car_id, Car.where(user_id: current_user.id), :id, :vehicle_type)
         .form
           = f.label :start_date
-          = f.datetime_select :start_date, minute_step: 15
+          = f.datetime_select :start_date, minute_step: 15, disabled: true
         .form
           = f.label :end_date
-          = f.datetime_select :end_date, minute_step: 15
+          = f.datetime_select :end_date, minute_step: 15, disabled: true
         .form
           = f.label :memo
           = f.text_field :memo
         .form
           = f.label :cancel_flag
           = f.check_box :cancel_flag
-        = f.submit "rental create!", class: "btn btn-outline-primary"
+        = f.submit "更新", class: "btn btn-outline-primary"
   .row
     .simple-calendar
       .calendar-heading
         = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
           = date
           - event.each do |event|
-            %div
-              = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
+            - if current_user == event.user
+              .alert.alert-success
+                =link_to "#{event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")}", park_event_path(park_id:event.park.id,id: event.id)
+            - else
+              .alert.alert-light
+                = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
+                - if current_user == @park_find.user
+                  = link_to event.car.designated_number, car_path(event.car_id)
