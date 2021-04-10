@@ -42,7 +42,11 @@ class EventsController < ApplicationController
   def update
     if @event.update(event_params)
       if @event.cancel_flag == true
-        redirect_to park_path(params[:park_id])
+        if current_user == @event.park.user
+          redirect_to park_path(params[:park_id])
+        else
+          redirect_to events_path
+        end
       else
         redirect_to park_event_path(park_id: params[:park_id], id: params[:id])
       end
