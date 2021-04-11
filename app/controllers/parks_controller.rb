@@ -71,7 +71,7 @@ class ParksController < ApplicationController
       @parks = Park.where.not(user_id: current_user.id).where(rending_stop: false).where('end_time > ?',Time.now).near(@search, 0.4)
       gon.parks = @parks 
     else
-      @parks = Park.all.near(@search, 0.4)
+      @parks = Park.where(rending_stop: false).where('end_time > ?',Time.now).near(@search, 0.4)
       gon.parks = @parks 
     end
   end
