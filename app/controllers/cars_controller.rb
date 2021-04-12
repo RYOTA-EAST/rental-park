@@ -5,7 +5,7 @@ class CarsController < ApplicationController
   def index
     @car = Car.where(user_id: current_user.id)
   end
-  
+
   def new
     @car = Car.new
   end
@@ -42,8 +42,10 @@ class CarsController < ApplicationController
   end
 
   private
+
   def car_params
-    params.require(:car).permit(:vehicle_type, :city, :class_number, :registration_type, :designated_number, :number_image, :vehicle_image, :use_stop).merge(user_id: current_user.id)
+    params.require(:car).permit(:vehicle_type, :city, :class_number, :registration_type, :designated_number, :number_image,
+                                :vehicle_image, :use_stop).merge(user_id: current_user.id)
   end
 
   def set_car_params
