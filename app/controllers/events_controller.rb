@@ -58,25 +58,11 @@ class EventsController < ApplicationController
     end
   end
 
-  # def cancel
-  #   @event.cancel_flag = TRUE
-  #   if @event.update(event_params_cancel)
-  #     @event = Event.where(park_id:params[:park_id])
-  #     redirect_to park_path(params[:id])
-  #   else
-  #     render :index
-  #   end
-  # end
-
   private
 
   def event_params
     params.require(:event).permit(:start_date, :end_date, :memo, :cancel_flag, :car_id).merge(park_id: params[:park_id],
                                                                                               user_id: current_user.id)
-  end
-
-  def event_params_cancel
-    params.permit(:start_date, :end_date, :memo, :cancel_flag, :car_id).merge(park_id: params[:park_id], user_id: current_user.id)
   end
 
   def set_event_params
