@@ -22,11 +22,10 @@
             = f.submit "検索", class: "btn btn-light", name: "search-commit"
         .login-user
           - if user_signed_in?
-            = "USER名："
-            = link_to "#{current_user.nickname}", edit_user_registration_path(id: current_user.id)
-            = link_to '駐車場一覧' , parks_path, method: :get ,class: ["logout","btn","btn-success"]
-            = link_to 'レンタル一覧' , events_path, method: :get ,class: ["logout","btn","btn-success"]
-            = link_to 'マイカー' , cars_path, method: :get ,class: ["logout","btn","btn-success"]
+            = link_to '駐車場一覧' , parks_path, method: :get ,class: ["logout","btn","btn-primary"]
+            = link_to 'レンタル一覧' , events_path, method: :get ,class: ["logout","btn","btn-primary"]
+            = link_to 'マイカー' , cars_path, method: :get ,class: ["logout","btn","btn-primary"]
+            = link_to "ユーザー：#{current_user.nickname}", edit_user_registration_path(id: current_user.id),class: ["logout","btn","btn-success"]
             = link_to 'ログアウト', destroy_user_session_path, method: :delete, role:"button", class: ["logout","btn","btn-danger"]
           - else
             = link_to 'ログイン', new_user_session_path, role: "button", class: ["login","btn","btn-primary"]

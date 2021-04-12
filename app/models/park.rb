@@ -9,8 +9,8 @@ class Park < ApplicationRecord
     validates :street
     validates :name
     validates :unit_price, numericality: {only_integer: true, message: 'は半角数字を入力してください'}
-    validates :start_time
-    validates :end_time
+    validates :start_time, park_duplicate: true
+    validates :end_time, park_duplicate: true
     validates :park_image
   end
   
@@ -25,13 +25,17 @@ class Park < ApplicationRecord
   end
   
   def start_end_check
-    unless start_time == nil || end_time == nil
-      errors.add(:end_time, "は開始時刻より遅い時間を選択してください") if self.start_time >= self.end_time
+    if self.id.nil?
+      unless start_time == nil || end_time == nil
+        errors.add(:end_time, "は開始時刻より遅い時間を選択してください") if self.start_time >= self.end_time
+      end
     end
   end
   def start_check
-    unless start_time == nil
-      errors.add(:start_time, "は現在の日時より遅い時間を選択してください") if self.start_time < Time.now
+    if self.id.nil?
+      unless start_time == nil
+        errors.add(:start_time, "は現在の日時より遅い時間を選択してください") if self.start_time < Time.now
+      end
     end
   end
   

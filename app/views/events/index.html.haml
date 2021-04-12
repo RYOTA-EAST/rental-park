@@ -44,7 +44,7 @@
                         = "0％負担"
                         - burden_ratio = 0
                   - elsif event.start_date > DateTime.now
-                    = link_to "借用予定", park_event_path(park_id:event.park.id,id: event.id)
+                    = link_to "借用予定", park_event_path(park_id:event.park.id,id: event.id,)
                   - elsif event.end_date < DateTime.now
                     = "借用済み"
                   - else

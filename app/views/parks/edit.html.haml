@@ -6,33 +6,33 @@
     = render 'layouts/error_messages', model: f.object
     .row
       .form-group.col-12    
-        = f.label :都道府県, class: "col-2 text-center"
+        = f.label :prefecture_id, class: "col-2 text-center"
         = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
 
-        = f.label :市町村, class: "col-1 text-center"
+        = f.label :city , class: "col-1 text-center"
         = f.text_field :city
 
-        = f.label :番地, class: "col-1 text-center"
+        = f.label :street, class: "col-1 text-center"
         = f.text_field :street
 
-        = f.label :その他, class: "col-1 text-center"
+        = f.label :explosive, class: "col-1 text-center"
         = f.text_field :explosive
     .row
       .form-group.col-12 
-        = f.label :名前, class: "col-2 text-center"
+        = f.label :name, class: "col-2 text-center"
         = f.text_field :name, class: "col-3"
 
     .row
       .form-group.col-12 
-        = f.label :単価, class: "col-2 text-center"
+        = f.label :unit_price, class: "col-2 text-center"
         = f.text_field :unit_price
     .row
       .form-group.col-12 
-        = f.label :借用開始日時, class: "col-2 text-center"
+        = f.label :start_time, class: "col-2 text-center"
         = f.datetime_select :start_time, minute_step: 15
     .row
       .form-group.col-12  
-        = f.label :借用終了日時, class: "col-2 text-center"
+        = f.label :end_time, class: "col-2 text-center"
         = f.datetime_select :end_time, minute_step: 15
     .row
       .form-group.col-2.text-center
