@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "ユーザー新規登録", type: :system do
+RSpec.describe 'ユーザー新規登録', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
@@ -22,15 +22,15 @@ RSpec.describe "ユーザー新規登録", type: :system do
       fill_in '苗字(全角カナ)', with: @user.last_name_kana
       fill_in '名前(全角カナ)', with: @user.first_name_kana
       fill_in '郵便番号', with: @user.postal_code
-      select "高知県", from: "user_prefecture_code"
+      select '高知県', from: 'user_prefecture_code'
       fill_in '市町村', with: @user.city
       fill_in '番地', with: @user.street
       fill_in 'Explosive', with: @user.explosive
       fill_in '電話番号', with: @user.phone_number
       # サインアップボタンを押すとユーザーモデルのカウントが1上がることを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(1)
+      end.to change { User.count }.by(1)
       # トップページへ遷移したことを確認する
       expect(current_path).to eq(root_path)
       # サインアップページへ遷移するボタンや、ログインページへ遷移するボタンが表示されていないことを確認する
@@ -56,15 +56,15 @@ RSpec.describe "ユーザー新規登録", type: :system do
       fill_in '苗字(全角カナ)', with: ''
       fill_in '名前(全角カナ)', with: ''
       fill_in '郵便番号', with: ''
-      select "--", from: "user_prefecture_code"
+      select '--', from: 'user_prefecture_code'
       fill_in '市町村', with: ''
       fill_in '番地', with: ''
       fill_in 'Explosive', with: ''
       fill_in '電話番号', with: ''
       # サインアップボタンを押してもユーザーモデルのカウントは上がらないことを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(0)
+      end.to change { User.count }.by(0)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq('/users')
     end

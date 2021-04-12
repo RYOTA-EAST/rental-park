@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise  :database_authenticatable, :registerable,
@@ -15,7 +14,7 @@ class User < ApplicationRecord
       validates :first_name
       validates :last_name
     end
-  
+
     with_options presence: true, format: { with: /\A[ァ-ヶ]+\z/, message: 'は全角カタカナを使用してください' } do
       validates :first_name_kana
       validates :last_name_kana
@@ -30,22 +29,20 @@ class User < ApplicationRecord
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
-  
+
   include JpPrefecture
   jp_prefecture :prefecture_code
- 
+
   def prefecture_name
     JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
   end
- 
+
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
-  
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
 
   validates :prefecture_id, numericality: { other_than: 1 }
-
-
 end

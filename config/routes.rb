@@ -12,16 +12,8 @@ Rails.application.routes.draw do
     collection do
       get :top_page
       get :search
-    end
-    resources :events, except: :index do
-      # member do
-      #   put :cancel
-      #   patch :cancel
-      # end
-    end
-    collection do
       get :postal_change
     end
+    resources :events, except: :index
   end
-
 end

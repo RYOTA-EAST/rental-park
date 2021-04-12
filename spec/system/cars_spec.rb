@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "マイカー新規登録", type: :system do
+RSpec.describe 'マイカー新規登録', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @car = FactoryBot.build(:car)
   end
-  context 'マイカーが新規登録ができるとき'do
+  context 'マイカーが新規登録ができるとき' do
     it 'ログインしたユーザーは新規登録できる' do
       # ログインする
       visit new_user_session_path
@@ -23,7 +23,7 @@ RSpec.describe "マイカー新規登録", type: :system do
       fill_in '分類番号', with: @car.class_number
       fill_in '登録種別', with: @car.registration_type
       fill_in 'ナンバー', with: @car.designated_number
-      
+
       # 添付する画像を定義する
       number_image_path = Rails.root.join('public/images/number.jpeg')
       vehicle_image_path = Rails.root.join('public/images/vehicle.jpeg')
@@ -32,9 +32,9 @@ RSpec.describe "マイカー新規登録", type: :system do
       attach_file('car[vehicle_image]', vehicle_image_path, make_visible: true)
 
       # 送信するとCarモデルのカウントが1上がることを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { Car.count }.by(1)
+      end.to change { Car.count }.by(1)
       # 投稿完了ページに遷移することを確認する
       expect(current_path).to eq(cars_path)
       # 「投稿が完了しました」の文字があることを確認する
@@ -44,7 +44,7 @@ RSpec.describe "マイカー新規登録", type: :system do
       expect(page).to have_content(@car.vehicle_type)
     end
   end
-  context '新規登録ができないとき'do
+  context '新規登録ができないとき' do
     it 'ログインしていないユーザーは新規登録ページに遷移できない' do
       # 投稿ページに移動する
       visit new_car_path
@@ -82,9 +82,9 @@ RSpec.describe 'マイカー情報編集', type: :system do
       # 車両内容を編集する
       fill_in 'car_vehicle_type', with: "#{@car1.vehicle_type}(編集)"
       # 編集してもcarモデルのカウントは変わらないことを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { Car.count }.by(0)
+      end.to change { Car.count }.by(0)
       # 車両一覧画面に遷移したことを確認する
       expect(current_path).to eq(cars_path)
       # 変更した内容の車両が存在することを確認する（テキスト）
@@ -137,13 +137,13 @@ RSpec.describe 'マイカー利用停止', type: :system do
       # 車両内容を編集する
       check '利用停止'
       # 編集してもcarモデルのカウントは変わらないことを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { Car.count }.by(0)
+      end.to change { Car.count }.by(0)
       # 車両一覧画面に遷移したことを確認する
       expect(current_path).to eq(cars_path)
       # 変更した内容の車両が存在することを確認する（テキスト）
-      expect(page).to have_content("利用停止")
+      expect(page).to have_content('利用停止')
     end
   end
   context '利用停止ができないとき' do
@@ -185,7 +185,7 @@ RSpec.describe 'マイカー詳細', type: :system do
       # 詳細ページに遷移する
       visit car_path(@car1)
       # 詳細ページに車両の内容が含まれている
-      expect(page).to have_content("#{@car1.vehicle_type}")
+      expect(page).to have_content(@car1.vehicle_type.to_s)
       # 「編集」ボタンがあることを確認する
       expect(page).to have_link '編集', href: edit_car_path(@car1)
     end
@@ -199,7 +199,7 @@ RSpec.describe 'マイカー詳細', type: :system do
       # 詳細ページに遷移する
       visit car_path(@car1)
       # 詳細ページに車両の内容が含まれている
-      expect(page).to have_content("#{@car1.vehicle_type}")
+      expect(page).to have_content(@car1.vehicle_type.to_s)
       # 「編集」ボタンがあることを確認する
       expect(page).to have_no_link '編集', href: edit_car_path(@car1)
     end
