@@ -24,10 +24,10 @@
           = f.collection_select(:car_id, Car.where(user_id: current_user.id), :id, :vehicle_type)
         .form
           = f.label :start_date
-          = f.datetime_select :start_date, minute_step: 15, disabled: true
+          = f.datetime_select :start_date, minute_step: 15, disabled: (@event.start_date.to_date - Time.now.to_date).to_i <= 3
         .form
           = f.label :end_date
-          = f.datetime_select :end_date, minute_step: 15, disabled: true
+          = f.datetime_select :end_date, minute_step: 15, disabled: (@event.start_date.to_date - Time.now.to_date).to_i <= 3
         .form
           = f.label :memo
           = f.text_field :memo
