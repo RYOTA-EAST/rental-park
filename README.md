@@ -1,6 +1,24 @@
-### テーブル設計
+# アプリ名
+RentaP(レンタパーク)
 
-# Usersテーブル
+# 概要
+駐車スペースを貸したい時に貸す、借りたい時に借りるアプリ
+
+# 制作背景(意図)
+## 飲食店を利用する際に感じた経験
+- 混んでいて駐車場がなく諦める
+- やっと空いた駐車場でも狭くて駐車しにくい、出にくくてためらう
+- 「近くに広い空いたスペースがあるのに」
+- 駐車場不足で周囲の住民・店舗に迷惑がかかり（無断駐車）閉店した店
+
+## 経験から考えたこと
+- 多少であればお金を払ってでもあのスペースに駐車したい
+- 貸す側も気軽にできれば空きスペースで利益を出せる
+
+
+# テーブル設計
+
+### Usersテーブル
 
 |Column             |Type    |Options                        |
 |-------------------|--------|-------------------------------|
@@ -18,12 +36,12 @@
 |explosive          |string  |                               |
 |phone_number       |string  |null: false                    |
 
-## Association
+### Association
 - has_many :events
 - has_many :cars
 - has_many :parks
 
-# Carsテーブル
+## Carsテーブル
 
 |Column             |Type           |Options                        |
 |-------------------|---------------|-------------------------------|
@@ -34,12 +52,12 @@
 |designated_number  |integer        |null: false                    |
 |user               |references     |null: false, foreign_key: true |
 
-## Association
+### Association
 - belongs_to :user
 - has_many :parks
 - has_many :events
 
-# Parksテーブル
+## Parksテーブル
 
 |Column             |Type           |Options                        |
 |-------------------|---------------|-------------------------------|
@@ -55,23 +73,12 @@
 |end_time           |datetime       |null: false                    |
 |user               |references     |null: false, foreign_key: true |
 
-## Association
+### Association
 - belongs_to :user
 - has_many :unusable_times
 - has_many :events
 
-# Unusable_timesテーブル
-
-|Column             |Type           |Options                        |
-|-------------------|---------------|-------------------------------|
-|start_time         |datetime       |null: false                    |
-|end_time           |datetime       |null: false                    |
-|park               |references     |null: false, foreign_key: true |
-
-## Association
-- belongs_to :park
-
-# Eventsテーブル
+## Eventsテーブル
 
 |Column             |Type           |Options                        |
 |-------------------|---------------|-------------------------------|
@@ -81,7 +88,27 @@
 |user               |references     |null: false, foreign_key: true |
 |car                |references     |null: false, foreign_key: true |
 
-## Association
+### Association
 - belongs_to :park
 - belongs_to :user
 - belongs_to :car
+
+# 使用技術
+
+## バックエンド
+Ruby、Ruby on Rails
+## フロントエンド
+Haml、bootstap、Javascript
+## データベース
+MySQL
+## 本番環境
+Heroku
+## ソース管理
+Git、Github
+## テスト
+Rspec
+## エディダ
+VScode
+
+# 課題や今後実装したい機能
+- 貸し出したユーザーが駐車場ごとの利益一覧、グラフ化
