@@ -1,5 +1,6 @@
 .container
   %h2.mb-3 トップページ
-  %p このアプリは駐車スペースを貸し借りするアプリです
-
-
+  %p= link_to "使い方" , page_path('guide')
+  %p= link_to "日時について" , page_path('time')
+  = image_tag 'top1.png', class: "img-fluid"
+  = image_tag 'top2.png', class: "img-fluid"
