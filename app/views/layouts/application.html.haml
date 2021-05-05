@@ -8,6 +8,7 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = include_gon
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag "current_search"
   %header.bg-info.text-white
     .container.sticky-top
       .d-flex.justify-content-between
@@ -19,7 +20,8 @@
         .form
           = form_with url: search_parks_path, method: :get, local: true do |f|
             = f.search_field :search_word
-            = f.submit "検索", class: "btn btn-light", name: "search-commit"
+            = f.submit "検索", class: "btn btn-light", name: "search-commit", id: "search-btn"
+          = submit_tag "現在地検索", class: "btn btn-light", name: "search-commit", id: "current-search", onclick: "CurrentSearch();"
         .login-user
           - if user_signed_in?
             = link_to '駐車場一覧' , parks_path, method: :get ,class: ["logout","btn","btn-primary"]
