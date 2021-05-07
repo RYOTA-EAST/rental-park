@@ -95,3 +95,7 @@ gem 'rounding'
 gem "aws-sdk-s3", require: false
 
 gem 'high_voltage'
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end
