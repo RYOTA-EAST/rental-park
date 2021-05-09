@@ -30,5 +30,7 @@
       .form-group.col-2.mb-1
         = f.label :designated_number
         = f.text_field :designated_number
+      .form
+        = f.check_box :use_stop, style: "display: none;"
     .row
       = f.submit "登録", class: "btn btn-outline-primary"
