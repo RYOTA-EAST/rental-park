@@ -22,7 +22,7 @@
             = f.search_field :search_word
             = f.submit "検索", class: "btn btn-light", name: "search-commit", id: "search-btn"
           = submit_tag "現在地検索", class: "btn btn-light", name: "search-commit", id: "current-search", onclick: "CurrentSearch();"
-          = link_to 'できない場合', 'https://support.google.com/chrome/answer/142065?co=GENIE.Platform%3DDesktop&hl=ja' ,class: "text-white"
+          = link_to 'できない場合', page_path('can_not_search') ,class: "text-white"
         .login-user
           - if user_signed_in?
             = link_to '駐車場一覧' , parks_path, method: :get ,class: ["logout","btn","btn-primary"]
