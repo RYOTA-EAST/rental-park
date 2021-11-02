@@ -11,28 +11,29 @@
     = javascript_include_tag "current_search"
   %header.bg-info.text-white
     .container.sticky-top
-      .d-flex.justify-content-between
-        .row
-          = link_to root_path, class: "text-white" do
-            .row
-              %h1 Renta
-              = image_tag 'park.png' ,height: '50px'
-        .form
-          = form_with url: search_parks_path, method: :get, local: true do |f|
-            = f.search_field :search_word
-            = f.submit "検索", class: "btn btn-light", name: "search-commit", id: "search-btn"
-          = submit_tag "現在地検索", class: "btn btn-light", name: "search-commit", id: "current-search", onclick: "CurrentSearch();"
-          = link_to 'できない場合', page_path('can_not_search') ,class: "text-white"
+      .d-flex.justify-content-between.align-items-center
+        = link_to root_path, class: "text-white" do
+          .row
+            %h1 Renta
+            = image_tag 'park.png' ,height: '50px'
+        .form.row.col-8
+          .col
+            = form_with url: search_parks_path, method: :get, local: true do |f|
+              = f.search_field :search_word
+              = f.submit "検索", class: "btn btn-light btn-sm", name: "search-commit", id: "search-btn"
+          .col 
+            = submit_tag "現在地検索", class: "btn btn-light btn-sm", name: "search-commit", id: "current-search", onclick: "CurrentSearch();"
+            = link_to 'できない場合', page_path('can_not_search') ,class: "text-white"
         .login-user
           - if user_signed_in?
-            = link_to '駐車場一覧' , parks_path, method: :get ,class: ["logout","btn","btn-primary"]
-            = link_to 'レンタル一覧' , events_path, method: :get ,class: ["logout","btn","btn-primary"]
-            = link_to 'マイカー' , cars_path, method: :get ,class: ["logout","btn","btn-primary"]
-            = link_to "ユーザー：#{current_user.nickname}", edit_user_registration_path(id: current_user.id),class: ["logout","btn","btn-success"]
-            = link_to 'ログアウト', destroy_user_session_path, method: :delete, role:"button", class: ["logout","btn","btn-danger"]
+            = link_to '駐車場一覧' , parks_path, method: :get ,class: "logout btn btn-primary btn-sm"
+            = link_to 'レンタル一覧' , events_path, method: :get ,class: "logout btn btn-primary btn-sm"
+            = link_to 'マイカー' , cars_path, method: :get ,class: "logout btn btn-primary btn-sm"
+            = link_to "ユーザー：#{current_user.nickname}", edit_user_registration_path(id: current_user.id), class: "logout btn btn-success btn-sm"
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete, role:"button", class: "logout btn btn-danger btn-sm"
           - else
-            = link_to 'ログイン', new_user_session_path, role: "button", class: ["login","btn","btn-primary"]
-            = link_to '新規登録', new_user_registration_path, role: "button", class: ["sign-up","btn","btn-success"],data: {"turbolinks"=>false}
+            = link_to 'ログイン', new_user_session_path, role: "button", class: "login btn btn-primary btn-sm"
+            = link_to '新規登録', new_user_registration_path, role: "button", class: "sign-up btn btn-success", data: {"turbolinks"=>false}
   .mb-5
     %body
       = yield
