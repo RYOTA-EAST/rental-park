@@ -17,13 +17,13 @@
             .row
               %h1 Renta
               = image_tag 'park.png' ,height: '50px'
-        .form.row.col-xl-5.d-flex.justify-content-center
+        .form.row.col-xl-4.d-flex.justify-content-center
           = form_with url: search_parks_path, method: :get, local: true do |f|
             = f.search_field :search_word
             = f.submit "検索", class: "btn btn-light btn-sm", name: "search-commit", id: "search-btn"
           = submit_tag "現在地検索", class: "btn btn-light btn-sm ml-2", name: "search-commit", id: "current-search", onclick: "CurrentSearch();"
           -# = link_to 'できない場合', page_path('can_not_search') ,class: "text-white"
-        .login-user.col-xl
+        .login-user.col-xl.my-2
           - if user_signed_in?
             = link_to '駐車場一覧' , parks_path, method: :get ,class: "logout btn btn-primary btn-sm"
             = link_to 'レンタル一覧' , events_path, method: :get ,class: "logout btn btn-primary btn-sm"
