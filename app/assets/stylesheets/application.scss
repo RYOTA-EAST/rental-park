@@ -18,29 +18,3 @@
 @import "bootstrap";
 @import  "simple_calendar" ;
 @import  "fullcalendar" ;
-
-.main-content{
-  background-color: rgb(243, 234, 234);
-  height: calc(100vh - 56px);
-}
-
-.sub-content{
-  height: calc(100vh - 96px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.new_user{
-  background-color: white;
-  width: 600px;
-  padding: 50px;
-  border-radius: 20px;
-}
-
-.edit_user{
-  background-color: white;
-  width: 600px;
-  padding: 50px;
-  border-radius: 20px;
-}
