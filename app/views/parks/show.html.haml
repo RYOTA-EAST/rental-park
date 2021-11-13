@@ -1,13 +1,15 @@
-.container 
-  .row 
-    .col-10
+.park-bg
+  .row
+    .col-xl.text-center
       %h2.mb-3 駐車場詳細
-    .col 
+    .col-xl-6
+    .col-xl
       - if user_signed_in?
         - if (current_user.id == @park_find.user.id)
-          = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
-          - unless @park_find.rending_stop == true || @park_find.end_time < Time.now
-            = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
+          .row.d-flex.justify-content-around.mb-3
+            = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
+            - unless @park_find.rending_stop == true || @park_find.end_time < Time.now
+              = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
         - elsif @park_find.rending_stop == false
           - if Car.exists?(user_id: current_user.id)
             = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
@@ -29,7 +31,7 @@
         .alert.alert-warning.text-center
           = "貸出停止"
   .row
-    .col-4
+    .col-xl-4
       %table.table.text-center
         %tr 
           %th 項目
@@ -52,13 +54,14 @@
               = "〜"
             .end_time
               = "#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
-    .col-4
-      %h5 駐車場画像
-      = image_tag @park_find.park_image, width: "300" if @park_find.park_image.attached?
-    .col-4
-      .map
-        #display 何かが表示される、、、、！
-        #map
+    .col-xl
+      .row.d-flex.justify-content-around
+        .parkimage
+          %h5 駐車場画像
+          = image_tag @park_find.park_image, width: "300" if @park_find.park_image.attached?
+        .map.ml-3
+          #display
+          #map-mini
   .row
     .simple-calendar
       .calendar-heading
@@ -79,14 +82,6 @@
     .alert.alert-light
       = "その他ユーザー(車両ナンバー)"
 
-:css
-  #map {
-    height: 300px;
-    width: 400px;
-    display: flex;
-    justify-content: center;
-  }
-
 :javascript
   let map
   let geocoder
@@ -98,7 +93,7 @@
     
     geocoder.geocode( { 'address': inputAddress}, function(results, status) {
       if (status == 'OK') {
-            map = new google.maps.Map(document.getElementById('map'), {
+            map = new google.maps.Map(document.getElementById('map-mini'), {
             zoom: 16,
     });
         map.setCenter(results[0].geometry.location);
