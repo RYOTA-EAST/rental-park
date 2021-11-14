@@ -1,6 +1,11 @@
 .container
-  %h2.mb-3 トップページ
-  %p= link_to "使い方" , page_path('guide')
-  %p= link_to "日時について" , page_path('time')
-  = image_tag 'top1.png', class: "img-fluid"
-  = image_tag 'top2.png', class: "img-fluid"
+  .main.overflow-auto.row
+    .col
+      %h2.mb-3 トップページ
+    .col.d-flex.justify-content-around
+      .div
+        = link_to "使い方" , page_path('guide'), class: "btn btn-primary"
+      .how
+        = link_to "日時について" , page_path('time'), class: "btn btn-primary"
+    = image_tag 'top1.png', class: "img-fluid"
+    = image_tag 'top2.png', class: "img-fluid"
