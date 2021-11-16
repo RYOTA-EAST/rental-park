@@ -5,7 +5,7 @@
       = link_to '新規登録', new_car_path, class:["btn","btn-primary"]
   .row
     - @car.each do |car|
-      .col-4
+      .col-sm-4
         = link_to car_path(car.id) do
           .card.mt-3.rounded
             = image_tag car.vehicle_image, class: "bd-placeholder-img card-img-top", height: "180px" if car.vehicle_image.attached?
