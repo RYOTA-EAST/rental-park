@@ -22,3 +22,10 @@
   display: flex;
   justify-content: center;
 }
+
+.sub-content{
+  height: calc(100vh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
