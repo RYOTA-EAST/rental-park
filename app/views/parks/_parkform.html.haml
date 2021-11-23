@@ -18,53 +18,53 @@
                 .col
                   = f.submit "郵便番号検索", class: "btn btn-outline-primary"
 
-          = form_with model: park, local: true do |f|
-          
-            = render 'layouts/error_messages', model: f.object
+        = form_with model: @park, local: true do |f|
+        
+          = render 'layouts/error_messages', model: f.object
 
-            .form-row.d-flex.justify-content-center.mb-2
-              .field-group.col-md-3
-                = f.label :prefecture_id
-                = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select form-control"})
-              .field-group.col-md-3
-                = f.label :city
-                = f.text_field :city, class: "form-control"
-              .field-group.col-md-3
-                = f.label :street
-                = f.text_field :street, class: "form-control"
-              .field-group.col-md-3
-                = f.label :explosive
-                = f.text_field :explosive, class: "form-control"
+          .form-row.d-flex.justify-content-center.mb-2
+            .field-group.col-md-3
+              = f.label :prefecture_id
+              = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select form-control"})
+            .field-group.col-md-3
+              = f.label :city
+              = f.text_field :city, class: "form-control"
+            .field-group.col-md-3
+              = f.label :street
+              = f.text_field :street, class: "form-control"
+            .field-group.col-md-3
+              = f.label :explosive
+              = f.text_field :explosive, class: "form-control"
 
-            .row
-              .col
-                .form-row.d-block.mb-2
-                  .field-group.col
-                    = f.label :name
-                    = f.text_field :name, class: "form-control"
-                  .form-group.col 
-                    = f.label :unit_price
-                    = f.text_field :unit_price, class: "form-control"
-                .form-row.d-flex.justify-content-center.mb-2
-                  .form-group.col
-                    = f.label :start_time, class: "text-center"
-                    %br/
-                    = f.datetime_select :start_time, minute_step: 15, class: "form-control"
-                .form-row.d-flex.justify-content-center.mb-2
-                  .form-group.col
-                    = f.label :end_time, class: "text-center"
-                    %br/
-                    = f.datetime_select :end_time, minute_step: 15, class: "form-control"
+          .row
+            .col
+              .form-row.d-block.mb-2
+                .field-group.col
+                  = f.label :name
+                  = f.text_field :name, class: "form-control"
+                .form-group.col 
+                  = f.label :unit_price
+                  = f.text_field :unit_price, class: "form-control"
+              .form-row.d-flex.justify-content-center.mb-2
+                .form-group.col
+                  = f.label :start_time, class: "text-center"
+                  %br/
+                  = f.datetime_select :start_time, minute_step: 15, class: "form-control"
+              .form-row.d-flex.justify-content-center.mb-2
+                .form-group.col
+                  = f.label :end_time, class: "text-center"
+                  %br/
+                  = f.datetime_select :end_time, minute_step: 15, class: "form-control"
 
-              .col
-                .form-row
-                  .form-group
-                    = f.label :park_image
-                    = f.file_field :park_image, id:"park_image"
-                    #park-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
+            .col
+              .form-row
+                .form-group
+                  = f.label :park_image
+                  = f.file_field :park_image, id:"park_image"
+                  #park-image-list{:style=>"width:200px; height:200px; border: thick double #32a1ce;"}
 
-              .form-group.col-12.text-center
-                = f.check_box :rending_stop, style: "display: none;"
-                
-            .form-row.d-flex.justify-content-center.mb-2
-              = f.submit "新規登録", class: "btn btn-outline-primary"
+            .form-group.col-12.text-center
+              = f.check_box :rending_stop
+              
+          .form-row.d-flex.justify-content-center.mb-2
+            = f.submit "新規登録", class: "btn btn-outline-primary"

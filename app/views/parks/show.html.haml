@@ -6,15 +6,15 @@
       .col-xl-6
       .col-xl
         - if user_signed_in?
-          - if (current_user.id == @park_find.user.id)
+          - if (current_user.id == @park.user.id)
             .row.d-flex.justify-content-around.mb-3
               = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
-              - unless @park_find.rending_stop == true || @park_find.end_time < Time.now
+              - unless @park.rending_stop == true || @park.end_time < Time.now
                 = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
-          - elsif @park_find.rending_stop == false
+          - elsif @park.rending_stop == false
             - if Car.exists?(user_id: current_user.id)
               = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
-            - elsif @park_find.rending_stop == false
+            - elsif @park.rending_stop == false
               = link_to new_car_path, class:["btn","btn-primary"] do
                 %div 車両登録で
                 %div レンタル
@@ -25,10 +25,10 @@
             %div レンタル
         
 
-        - if @park_find.end_time < Time.now
+        - if @park.end_time < Time.now
           .alert.alert-danger.text-center
             = "貸出期間終了"
-        - elsif @park_find.rending_stop == true
+        - elsif @park.rending_stop == true
           .alert.alert-warning.text-center
             = "貸出停止"
     .row
@@ -39,27 +39,27 @@
             %th 内容
           %tr 
             %td 名前
-            %td= @park_find.name
+            %td= @park.name
           %tr 
             %td 住所
-            %td#address= @park_find.prefecture.name + @park_find.city + @park_find.street + @park_find.explosive
+            %td#address= @park.prefecture.name + @park.city + @park.street + @park.explosive
           %tr 
             %td 単価
-            %td= @park_find.unit_price
+            %td= @park.unit_price
           %tr 
             %td 期間
             %td
               .stert_time
-                = "#{@park_find.start_time.strftime("%Y年%m月%d日%H:%M")}"
+                = "#{@park.start_time.strftime("%Y年%m月%d日%H:%M")}"
               .beetween
                 = "〜"
               .end_time
-                = "#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
+                = "#{@park.end_time.strftime("%Y年%m月%d日%H:%M")}"
       .col-xl
         .row.d-flex.justify-content-around
           .parkimage
             %h5 駐車場画像
-            = image_tag @park_find.park_image, width: "300" if @park_find.park_image.attached?
+            = image_tag @park.park_image, width: "300" if @park.park_image.attached?
           .map.ml-3
             #display
             #map-mini
@@ -75,7 +75,7 @@
                 - else
                   .btn.btn-light.btn-sm
                     = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
-                    - if current_user == @park_find.user
+                    - if current_user == @park.user
                       = link_to event.car.designated_number, car_path(event.car_id)
       .btn.btn-success.btn-sm.m-2
         = "ログインユーザー"
@@ -88,7 +88,7 @@
   const display = document.getElementById('display')
   
   function initMap(){
-    let inputAddress = "#{@park_find.city + @park_find.street + @park_find.explosive}";
+    let inputAddress = "#{@park.city + @park.street + @park.explosive}";
     geocoder = new google.maps.Geocoder()
     
     geocoder.geocode( { 'address': inputAddress}, function(results, status) {
