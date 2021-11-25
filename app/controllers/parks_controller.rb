@@ -30,7 +30,7 @@ class ParksController < ApplicationController
   end
 
   def update
-    if @park_find.update(park_params)
+    if @park.update(park_params)
       redirect_to park_path
     else
       render :edit
@@ -38,7 +38,7 @@ class ParksController < ApplicationController
   end
 
   def destroy
-    if @park_find.destroy!
+    if @park.destroy
       redirect_to root_path
     else
       render :index
@@ -85,10 +85,10 @@ class ParksController < ApplicationController
   end
 
   def set_park_params
-    @park_find = Park.find(params[:id])
+    @park = Park.find(params[:id])
   end
 
   def move_to_top
-    redirect_to top_page_parks_path unless current_user == @park_find.user
+    redirect_to top_page_parks_path unless current_user == @park.user
   end
 end

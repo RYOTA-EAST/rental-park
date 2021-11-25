@@ -1,91 +1,86 @@
-.container 
-  .row 
-    .col-10
-      %h2.mb-3 駐車場詳細
-    .col 
-      - if user_signed_in?
-        - if (current_user.id == @park_find.user.id)
-          = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
-          - unless @park_find.rending_stop == true || @park_find.end_time < Time.now
-            = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
-        - elsif @park_find.rending_stop == false
-          - if Car.exists?(user_id: current_user.id)
-            = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
-          - elsif @park_find.rending_stop == false
-            = link_to new_car_path, class:["btn","btn-primary"] do
-              %div 車両登録で
-              %div レンタル
-      - else
-        = link_to new_park_event_path(params[:id]), class:["btn","btn-primary"] do
-          %div ログインと
-          %div 車両登録で
-          %div レンタル
-      
+.container
+  .park-bg
+    .row
+      .col-xl.text-center
+        %h2.mb-3 駐車場詳細
+      .col-xl-6
+      .col-xl
+        - if user_signed_in?
+          - if (current_user.id == @park.user.id)
+            .row.d-flex.justify-content-around.mb-3
+              = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
+              - unless @park.rending_stop == true || @park.end_time < Time.now
+                = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
+          - elsif @park.rending_stop == false
+            - if Car.exists?(user_id: current_user.id)
+              = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
+            - elsif @park.rending_stop == false
+              = link_to new_car_path, class:["btn","btn-primary"] do
+                %div 車両登録で
+                %div レンタル
+        - else
+          = link_to new_park_event_path(params[:id]), class:["btn","btn-primary"] do
+            %div ログインと
+            %div 車両登録で
+            %div レンタル
+        
 
-      - if @park_find.end_time < Time.now
-        .alert.alert-danger.text-center
-          = "貸出期間終了"
-      - elsif @park_find.rending_stop == true
-        .alert.alert-warning.text-center
-          = "貸出停止"
-  .row
-    .col-4
-      %table.table.text-center
-        %tr 
-          %th 項目
-          %th 内容
-        %tr 
-          %td 名前
-          %td= @park_find.name
-        %tr 
-          %td 住所
-          %td#address= @park_find.prefecture.name + @park_find.city + @park_find.street + @park_find.explosive
-        %tr 
-          %td 単価
-          %td= @park_find.unit_price
-        %tr 
-          %td 期間
-          %td
-            .stert_time
-              = "#{@park_find.start_time.strftime("%Y年%m月%d日%H:%M")}"
-            .beetween
-              = "〜"
-            .end_time
-              = "#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
-    .col-4
-      %h5 駐車場画像
-      = image_tag @park_find.park_image, width: "300" if @park_find.park_image.attached?
-    .col-4
-      .map
-        #display 何かが表示される、、、、！
-        #map
-  .row
-    .simple-calendar
-      .calendar-heading
-        = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
-          = date
-          - event.each do |event|
-            - if current_user == event.user
-              .alert.alert-success
-                =link_to "#{event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")}", park_event_path(park_id:event.park.id,id: event.id)
-            - else
-              .alert.alert-light
-                = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
-                - if current_user == @park_find.user
-                  = link_to event.car.designated_number, car_path(event.car_id)
-    %p 凡例
-    .alert.alert-success
-      = "ログインユーザー"
-    .alert.alert-light
-      = "その他ユーザー(車両ナンバー)"
-
-:css
-  #map {
-    height: 300px;
-    width: 400px;
-    display: flex;
-    justify-content: center;
-  }
+        - if @park.end_time < Time.now
+          .alert.alert-danger.text-center
+            = "貸出期間終了"
+        - elsif @park.rending_stop == true
+          .alert.alert-warning.text-center
+            = "貸出停止"
+    .row
+      .col-xl-4
+        %table.table.text-center
+          %tr 
+            %th 項目
+            %th 内容
+          %tr 
+            %td 名前
+            %td= @park.name
+          %tr 
+            %td 住所
+            %td#address= @park.prefecture.name + @park.city + @park.street + @park.explosive
+          %tr 
+            %td 単価
+            %td= @park.unit_price
+          %tr 
+            %td 期間
+            %td
+              .stert_time
+                = "#{@park.start_time.strftime("%Y年%m月%d日%H:%M")}"
+              .beetween
+                = "〜"
+              .end_time
+                = "#{@park.end_time.strftime("%Y年%m月%d日%H:%M")}"
+      .col-xl
+        .row.d-flex.justify-content-around
+          .parkimage
+            %h5 駐車場画像
+            = image_tag @park.park_image, width: "300" if @park.park_image.attached?
+          .map.ml-3
+            #display
+            #map-mini
+    .row
+      .simple-calendar.text-center.my-2
+        .calendar-heading
+          = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
+            = date
+            - event.each do |event|
+              .event
+                - if current_user == event.user
+                  =link_to "#{event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")}", park_event_path(park_id:event.park.id,id: event.id), class: "btn btn-success btn-sm"
+                - else
+                  .btn.btn-light.btn-sm
+                    = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
+                    - if current_user == @park.user
+                      = link_to event.car.designated_number, car_path(event.car_id)
+      .btn.btn-success.btn-sm.m-2
+        = "ログインユーザー"
+      .btn.btn-light.btn-sm.m-2
+        = "その他ユーザー(車両ナンバー)"
 
 :javascript
   let map
@@ -93,12 +88,12 @@
   const display = document.getElementById('display')
   
   function initMap(){
-    let inputAddress = "#{@park_find.city + @park_find.street + @park_find.explosive}";
+    let inputAddress = "#{@park.city + @park.street + @park.explosive}";
     geocoder = new google.maps.Geocoder()
     
     geocoder.geocode( { 'address': inputAddress}, function(results, status) {
       if (status == 'OK') {
-            map = new google.maps.Map(document.getElementById('map'), {
+            map = new google.maps.Map(document.getElementById('map-mini'), {
             zoom: 16,
     });
         map.setCenter(results[0].geometry.location);

@@ -1,89 +1,33 @@
-= javascript_include_tag "test"
-.container
-  #calendar
-  .row
-    %h2.mb-3 駐車場一覧
-    = link_to '新規作成', new_park_path, class: ["btn","btn-primary"]
-  .row 
-    .col-6
-      - @park_all.each do |park|
-        = link_to park_path(park.id) do
-          .card
-            .card-body
-              .row
-                .col-8
-                  - if park.end_time < Time.now
-                    .alert.alert-danger.text-center
-                      = "貸出期間終了"
-                  - elsif park.rending_stop == true
-                    .alert.alert-warning.text-center
-                      = "貸出停止"
-                  .name= "#{park.name}"
-                  .price= "(15分：#{park.unit_price}円)"
-                  .street= "#{park.street}"
-                .col-4
-                  = image_tag park.park_image, height: "80x" if park.park_image.attached?
+= javascript_include_tag "map_index"
 
-    .col-6
-      #map
-:css
-  #map {
-    height: 700px;
-    width: 500px;
+.park-bg
+  .container
+    .row
+      .page_title
+        %h2.mb-3 駐車場一覧
+      .new_park_link
+        = link_to '新規作成', new_park_path, class: "btn btn-primary ml-2"
+    .row 
+      .park_index.col-6.overflow-auto
+        - @park_all.each do |park|
+          = link_to park_path(park.id) do
+            .card.mt-2
+              .row.no-gutters
+                .col-xl-4.d-flex.align-items-center
+                  = image_tag park.park_image,class: "bd-placeholder-img ml-2", width: "100%" if park.park_image.attached?
+                .col
+                  .card-body
+                    - if park.end_time < Time.now
+                      .alert.alert-danger.text-center
+                        = "貸出期間終了"
+                    - elsif park.rending_stop == true
+                      .alert.alert-warning.text-center
+                        = "貸出停止"
+                    .name= "#{park.name}"
+                    .price= "(15分：#{park.unit_price}円)"
+                    .street= "#{park.street}"
 
-  }
-:javascript
-  let map
-  let geocoder
-  let marker = []; // マーカーを複数表示させたいので、配列化
-  let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
-  const parks = gon.parks; // コントローラーで定義したインスタンス変数を変数に代入
-  
-  
-  function initMap(){
-      // geocoderを初期化
-      geocoder = new google.maps.Geocoder()
-      var bounds = new google.maps.LatLngBounds();
-      // mapの初期位置設定
-      map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -35.6809591, lng: 139.7673068},
-      zoom: 16
-      });
-      // forは繰り返し処理
-      // 変数iを0と定義し、
-      // その後gonで定義したusers分繰り返し加える処理を行う
-      for (let i = 0; i < parks.length; i++) {
-          // geocoderで addressの経緯緯度取得
-          // users[i]は変数iのユーザーを取得している
-          geocoder.geocode( { 'address': parks[i].city + parks[i].street }, function(results, status) {
-              // statusがOKであれば
-          if (status == 'OK') {
-      　　　　// map.setCenterで地図が移動
-              map.setCenter(results[0].geometry.location);
-              marker[i] = new google.maps.Marker({
-                  map: map,
-                  position: results[0].geometry.location
-              });
-              bounds.extend (marker[i].position);
-              // 変数iを変数idに代入
-              let id = parks[i]['id']
-              // infoWindowは吹き出し
-              infoWindow[i] = new google.maps.InfoWindow({
-              // contentで中身を指定
-              // 今回は文字にリンクを貼り付けた形で表示
-              content: `<a href='/parks/${id}'>${parks[i].name}</a>`
-              });
-              // markerがクリックされた時、
-              marker[i].addListener("click", function(){
-                  // infoWindowを表示
-                  infoWindow[i].open(map, marker[i]);
-              });
-          } else {
-              alert('Geocode was not successful for the following reason: ' + status);
-          }
-          map.fitBounds(bounds);
-          });
-      }
-  }
-  
+      .col-6
+        #map
+
 %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY_HTTP']}&libraries=places&callback=initMap"}

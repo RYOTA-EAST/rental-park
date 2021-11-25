@@ -102,7 +102,7 @@ Haml、bootstap、Javascript
 ## データベース
 MySQL
 ## 本番環境
-Heroku
+AWS
 ## ソース管理
 Git、Github
 ## テスト

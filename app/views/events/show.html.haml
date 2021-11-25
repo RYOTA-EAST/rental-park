@@ -33,14 +33,15 @@
             %td= use_time / 15 * @event.park.unit_price
             %td= link_to @event.car.vehicle_type, car_path(@event.car.id)
             %td
-              - if (@event.start_date.to_date  - Date.today).to_i < 1
-                = "100％負担"
-                %td= use_time / 15 * @event.park.unit_price
-              - elsif (@event.start_date.to_date  - Date.today).to_i <= 3
-                = "50％負担"
-                %td=(use_time / 15 * @event.park.unit_price * 0.5).to_i
+              - if @event.park.user == current_user
+                = "貸出停止0%"
               - else
-                = "0％負担"
+                - if (@event.start_date.to_date  - Date.today).to_i < 1
+                  = "100％負担"
+                  %td= use_time / 15 * @event.park.unit_price
+                - elsif (@event.start_date.to_date  - Date.today).to_i <= 3
+                  = "50％負担"
+                  %td=(use_time / 15 * @event.park.unit_price * 0.5).to_i
+                - else
+                  = "0％負担"
             %td
-
-

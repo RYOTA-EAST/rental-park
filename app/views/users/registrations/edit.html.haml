@@ -1,99 +1,63 @@
-.container
-  .d-flex
-    .left-content
-      .row
-        %h2.mb-3 ユーザー情報編集
-      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+.user-content
+  .sub-content.text-center
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      %h2.mb-3 ユーザー編集&削除
+      .form-new
         = render "users/shared/error_messages", resource: resource
-        .row
-          .form-group.col-3.mb-1
+        .form-row
+          .col
             = f.label :nickname
-            %br/
-            = f.text_field :nickname, autofocus: true
-          .form-group.col-3.mb-1
+            = f.text_field :nickname, class: "form-control"
+          .col
             = f.label :email
-            %br/
-            = f.email_field :email, autofocus: true, autocomplete: "email"
-          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-            %div
-              Currently waiting confirmation fr: #{resource.unconfirmed_email}
-        .row
-          .form-group.col-6.mb-1
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+        .form-row
+          .col
             = f.label :password
-            %i (leave blank if you don't want to change it)
-            %br/
-            = f.password_field :password, autocomplete: "new-password"
             - if @minimum_password_length
-              %br/
               %em
-                = @minimum_password_length
-                characters minimum
-          .form-group.col-6.mb-1
+                (#{@minimum_password_length} characters minimum)
+            = f.password_field :password, autocomplete: "new-password", class: "form-control"
+          .col
             = f.label :password_confirmation
-            %br/
-            = f.password_field :password_confirmation, autocomplete: "new-password"
-        .row
-          .form-group.col-12.mb-1
-            = f.label :current_password
-            %i (we need your current password to confirm your changes)
-            %br/
-            = f.password_field :current_password, autocomplete: "current-password"
-        .row
-          .form-group.col-3.mb-1
+            = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+        .form-row
+          .col
             = f.label :last_name
-            %br/
-            = f.text_field :last_name, autofocus: true
-          .form-group.col-3.mb-1
+            = f.text_field :last_name, class: "form-control"
+          .col
             = f.label :first_name
-            %br/
-            = f.text_field :first_name, autofocus: true
-        .row
-          .form-group.col-3.mb-1
+            = f.text_field :first_name, class: "form-control"
+        .form-row
+          .field-group.col
             = f.label :last_name_kana
-            %br/
-            = f.text_field :last_name_kana, autofocus: true
-          .form-group.col-3.mb-1
+            = f.text_field :last_name_kana, class: "form-control"
+          .field-group.col
             = f.label :first_name_kana
-            %br/
-            = f.text_field :first_name_kana, autofocus: true
-        .row
-          .form-group.col-2.mb-1
+            = f.text_field :first_name_kana, class: "form-control"
+        .form-row
+          .field-group.col
             = f.label :postal_code
-            %br/
-            = f.text_field :postal_code, autofocus: true
-        .row
-          .form-group.col-3.mb-1
-            = f.label :prefecture_id
-            %br/
-            = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"})
-          .form-group.col-3.mb-1
-            = f.label :city
-            %br/
-            = f.text_field :city, autofocus: true
-          .form-group.col-3.mb-1
-            = f.label :street
-            %br/
-            = f.text_field :street, autofocus: true
-          .form-group.col-3.mb-1
-            = f.label :explosive
-            %br/
-            = f.text_field :explosive, autofocus: true
-        .row
-          .form-group.col-4.mb-1
+            = f.text_field :postal_code, class: "form-control", id: "user_postal_code"
+          .field-group.col
             = f.label :phone_number
-            %br/
-            = f.text_field :phone_number, autofocus: true
-        .row
-          .actions
-            = f.submit "Update"
-    .right-content
-      .row
-        %h3 ユーザー削除
-      .row
-        %p
-          Unhappy? 
-      .row
-        #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-  .down-conrent
-    .row
-      = link_to "Back", :back
+            = f.text_field :phone_number, class: "form-control"
+        .form-row
+          .field-group.col
+            = f.label :prefecture_id
+            = f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select form-control", id: "user_prefecture_code"})
+          .field-group.col
+            = f.label :city
+            = f.text_field :city, class: "form-control", id: "user_city"
+          .field-group.col
+            = f.label :street
+            = f.text_field :street, class: "form-control", id: "user_street"
+          .field-group.col
+            = f.label :explosive
+            = f.text_field :explosive, class: "form-control"
+
+        .actions.d-flex.justify-content-center.mt-2
+          = f.submit "編集", class: "btn btn-primary btn-sm mr-2"
+          #{button_to "削除", registration_path(resource_name), class:"btn btn-danger ml-2", data: { confirm: "本当に削除しますか?" }, method: :delete}
+        .login.mt-2
+          = render "users/shared/links"
