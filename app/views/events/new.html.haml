@@ -27,21 +27,22 @@
               = "〜"
             .end_time
               = "#{@park_find.end_time.strftime("%Y年%m月%d日%H:%M")}"
-    .col-6
+    .col-xl-6
       = form_with model: [@park_find, @event], local: true do |f|
         = render 'layouts/error_messages', model: f.object
-        .form
-          = f.label :car_id, class: 'roster-label'
+        .form-group
+          = f.label :car_id, class: "col-3 text-center"
           = f.collection_select(:car_id, Car.where(user_id: current_user.id).where(use_stop: false), :id, :vehicle_type)
-        .form
-          = f.label :start_date
+        .form-group
+          = f.label :start_date, class: "col-3 text-center"
           = f.datetime_select :start_date, minute_step: 15
-        .form
-          = f.label :end_date
+        .form-group
+          = f.label :end_date, class: "col-3 text-center"
           = f.datetime_select :end_date, minute_step: 15
-        .form
-          = f.label :memo
+        .form-group
+          = f.label :memo, class: "col-3 text-center"
           = f.text_field :memo
+
         = f.submit "レンタル登録", class: "btn btn-outline-primary"
   .row
     .simple-calendar
