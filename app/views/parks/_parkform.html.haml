@@ -74,11 +74,11 @@
                     .form-group.col-md-3.d-none
                       = f.label :rending_stop
                       = f.check_box :rending_stop
-                    .form-row.d-flex.justify-content-center.mb-2
+                    .form-row.d-flex.justify-content-center
                       = f.submit "新規登録", class: "btn btn-outline-primary"
                   - when "edit"
-                    .form-group.col-md-3
+                    .form-group.col-md
                       = f.label :rending_stop
                       = f.check_box :rending_stop
-                    .form-row.d-flex.justify-content-center.mb-2
+                    .form-row.d-flex.justify-content-center
                       = f.submit "更新", class: "btn btn-outline-primary"
