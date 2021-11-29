@@ -2,18 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.park_index{
-  height: 750px;
-}
-
 .park-bg{
   background-color:  rgb(243, 234, 234);
   height: calc(100vh - 90px);
 }
 
 #map {
-  height: 750px;
-  width: 500px;
+  height: 400px;
 }
 
 #map-mini {
@@ -24,7 +19,6 @@
 }
 
 .sub-content{
-  height: calc(100vh - 90px);
   display: flex;
   align-items: center;
   justify-content: center;
