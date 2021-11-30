@@ -1,9 +1,17 @@
 .container
   .park-bg
     .row
-      .col-xl.text-center
-        %h2.mb-3 駐車場詳細
-      .col-xl-6
+      .col-xl.text-center.row
+        .col
+          %h2.mb-3= "駐車場名:  " + @park.name
+        .col
+          %h4 
+            - if @park.end_time < Time.now
+              .badge.badge-danger.text-center
+                = "貸出期間終了"
+            - elsif @park.rending_stop == true
+              .badge.badge-warning.text-center
+                = "貸出停止"
       .col-xl
         - if user_signed_in?
           - if (current_user.id == @park.user.id)
@@ -25,21 +33,12 @@
             %div レンタル
         
 
-        - if @park.end_time < Time.now
-          .alert.alert-danger.text-center
-            = "貸出期間終了"
-        - elsif @park.rending_stop == true
-          .alert.alert-warning.text-center
-            = "貸出停止"
     .row
       .col-xl-4
         %table.table.text-center
           %tr 
             %th 項目
             %th 内容
-          %tr 
-            %td 名前
-            %td= @park.name
           %tr 
             %td 住所
             %td#address= @park.prefecture.name + @park.city + @park.street + @park.explosive
