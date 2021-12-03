@@ -44,20 +44,5 @@
           = f.text_field :memo
 
         = f.submit "レンタル登録", class: "btn btn-outline-primary"
-  .row
-    .simple-calendar
-      .calendar-heading
-        = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
-          = date
-          - event.each do |event|
-            - if current_user == event.user
-              .alert.alert-success
-                =link_to "#{event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")}", park_event_path(park_id:event.park.id,id: event.id)
-            - else
-              .alert.alert-light
-                = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
-    %p 凡例
-    .alert.alert-success
-      = "ログインユーザー"
-    .alert.alert-light
-      = "その他ユーザー"
+
+    = render 'layouts/calendar', events: @events
