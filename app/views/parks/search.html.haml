@@ -1,37 +1,29 @@
 .container
-  %h2.mb-3 駐車場検索結果
-  %p="検索場所：#{@search}" 
+  %h2.mb-3= "駐車場検索：『#{@search}』" 
+  #map
   .row 
-    .col-6
-      - @parks.each do |park|
-        = link_to park_path(park.id) do
-          .card
-            .card-body
-              .row
-                .col-8
-                  - if park.end_time < Time.now
-                    .alert.alert-danger.text-center
-                      = "貸出期間終了"
-                  - elsif park.rending_stop == true
-                    .alert.alert-warning.text-center
-                      = "貸出停止"
-                  .row 
-                    .name= "#{park.name}"
-                  .row 
-                    .distans= "約#{(park.distance_from(@search_geo) * 1000).round(-1)}m"
-                    .price= "(#{park.unit_price}円/15分)"
-                  .row 
-                    .street= "#{park.street}"
-                .col-4
-                  = image_tag park.park_image, height: "80x" if park.park_image.attached?
-    .col-6
-      #map
-:css
-  #map {
-    height: 700px;
-    width: 500px;
+    .overflow-auto
+      .row
+        - @parks.each do |park|
+          .col-md-4
+            = link_to park_path(park.id) do
+              .card.mt-2.card-park
+                .row.no-gutters
+                  .col.d-flex.align-items-center
+                    - if park.end_time < Time.now
+                      .alert.alert-danger.text-center
+                        = "貸出期間終了"
+                    - elsif park.rending_stop == true
+                      .alert.alert-warning.text-center
+                        = "貸出停止"
+                    .d-block
+                      .name= "#{park.name}"
+                      .distans= "約#{(park.distance_from(@search_geo) * 1000).round(-1)}m"
+                      .price= "(#{park.unit_price}円/15分)"
+                      .street= "#{park.street}"
+                  .col
+                    = image_tag park.park_image, height: "80x" if park.park_image.attached?
 
-  }
 :javascript
   let map
   let geocoder

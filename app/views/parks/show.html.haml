@@ -1,10 +1,12 @@
 .container
   .park-bg
-    .row
-      .col-xl.text-center.row
-        .col
-          %h2.mb-3= "駐車場名:  " + @park.name
-        .col
+    .row.mt-3
+      .col-xl-8.text-center.row
+        .col-xl-9
+          %span="駐車場名"
+          %strong 
+            %h4.mb-3= "『" + @park.name + "』"
+        .col.d-flex.align-items-center.justify-content-center
           %h4 
             - if @park.end_time < Time.now
               .badge.badge-danger.text-center
@@ -12,13 +14,12 @@
             - elsif @park.rending_stop == true
               .badge.badge-warning.text-center
                 = "貸出停止"
-      .col-xl
+      .col-xl.d-flex.justify-content-around.align-items-center
         - if user_signed_in?
           - if (current_user.id == @park.user.id)
-            .row.d-flex.justify-content-around.mb-3
-              = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
-              - unless @park.rending_stop == true || @park.end_time < Time.now
-                = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
+            = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
+            - unless @park.rending_stop == true || @park.end_time < Time.now
+              = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
           - elsif @park.rending_stop == false
             - if Car.exists?(user_id: current_user.id)
               = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
