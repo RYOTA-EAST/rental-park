@@ -20,7 +20,7 @@
             = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
             - unless @park.rending_stop == true || @park.end_time < Time.now
               = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
-          - elsif @park.rending_stop == false
+          - elsif @park.rending_stop == false && @park.end_time > Time.now
             - if Car.exists?(user_id: current_user.id)
               = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
             - elsif @park.rending_stop == false
