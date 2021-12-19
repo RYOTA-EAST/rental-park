@@ -1,17 +1,26 @@
 .container
   .park-bg
-    .row
-      .col-xl.text-center
-        %h2.mb-3 駐車場詳細
-      .col-xl-6
-      .col-xl
+    .row.mt-3
+      .col-xl-8.text-center.row
+        .col-xl-9
+          %span="駐車場名"
+          %strong 
+            %h4.mb-3= "『" + @park.name + "』"
+        .col.d-flex.align-items-center.justify-content-center
+          %h4 
+            - if @park.end_time < Time.now
+              .badge.badge-danger.text-center
+                = "貸出期間終了"
+            - elsif @park.rending_stop == true
+              .badge.badge-warning.text-center
+                = "貸出停止"
+      .col-xl.d-flex.justify-content-around.align-items-center
         - if user_signed_in?
           - if (current_user.id == @park.user.id)
-            .row.d-flex.justify-content-around.mb-3
-              = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
-              - unless @park.rending_stop == true || @park.end_time < Time.now
-                = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
-          - elsif @park.rending_stop == false
+            = link_to '編集', edit_park_path(params[:id]), class: "btn btn-primary"
+            - unless @park.rending_stop == true || @park.end_time < Time.now
+              = link_to '貸出停止日時設定', new_park_event_path(params[:id]), class: "btn btn-warning"
+          - elsif @park.rending_stop == false && @park.end_time > Time.now
             - if Car.exists?(user_id: current_user.id)
               = link_to 'レンタル', new_park_event_path(params[:id]), class: "btn btn-primary"
             - elsif @park.rending_stop == false
@@ -25,21 +34,12 @@
             %div レンタル
         
 
-        - if @park.end_time < Time.now
-          .alert.alert-danger.text-center
-            = "貸出期間終了"
-        - elsif @park.rending_stop == true
-          .alert.alert-warning.text-center
-            = "貸出停止"
     .row
       .col-xl-4
         %table.table.text-center
           %tr 
             %th 項目
             %th 内容
-          %tr 
-            %td 名前
-            %td= @park.name
           %tr 
             %td 住所
             %td#address= @park.prefecture.name + @park.city + @park.street + @park.explosive
@@ -63,24 +63,8 @@
           .map.ml-3
             #display
             #map-mini
-    .row
-      .simple-calendar.text-center.my-2
-        .calendar-heading
-          = week_calendar(attribute: :start_date, events: @events, number_of_weeks: 1) do |date, event|
-            = date
-            - event.each do |event|
-              .event
-                - if current_user == event.user
-                  =link_to "#{event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")}", park_event_path(park_id:event.park.id,id: event.id), class: "btn btn-success btn-sm"
-                - else
-                  .btn.btn-light.btn-sm
-                    = event.start_date.strftime("%H:%M") + "〜" + event.end_date.strftime("%H:%M")
-                    - if current_user == @park.user
-                      = link_to event.car.designated_number, car_path(event.car_id)
-      .btn.btn-success.btn-sm.m-2
-        = "ログインユーザー"
-      .btn.btn-light.btn-sm.m-2
-        = "その他ユーザー(車両ナンバー)"
+            
+    = render 'layouts/calendar', events: @events
 
 :javascript
   let map

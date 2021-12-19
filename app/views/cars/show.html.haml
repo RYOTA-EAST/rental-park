@@ -1,12 +1,13 @@
 .container 
   .row 
-    .col-10
-      %h2.mb-3 マイカー詳細ページ
-    .col 
+    .col-sm
+      .name
+        %h2.mb-3="車名: " + @car.vehicle_type
+        - if @car.use_stop == true
+          .badge.badge-warning.text-center.ml-3
+            %h3= "利用停止"
+    .col-sm.text-right
       =link_to '編集', edit_car_path(params[:id]), class: "btn btn-primary" if current_user == @car.user
-      - if @car.use_stop == true
-        .alert.alert-warning.text-center
-          = "利用停止"
 
   .row
     .col
@@ -22,9 +23,6 @@
         %tr 
           %th 項目
           %th 内容
-        %tr 
-          %td 車種
-          %td= @car.vehicle_type
         %tr 
           %td 地域 分類番号
           %td= "#{@car.city} #{@car.class_number}"
